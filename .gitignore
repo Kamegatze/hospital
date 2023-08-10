@@ -1,7 +1,7 @@
 HELP.md
 .mvn
-hospital-frontend/.idea
-hospital-frontend/node_modules
+front-hospital/.idea
+front-hospital/node_modules
 src/main/resources/application.properties
 docker-compose.yaml
 target/
