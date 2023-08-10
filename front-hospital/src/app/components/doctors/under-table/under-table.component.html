@@ -1,0 +1,25 @@
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col" class="text-center">№</th>
+        <th scope="col" class="text-center">Фамилие</th>
+        <th scope="col" class="text-center">Имя</th>
+        <th scope="col" class="text-center">Отчество</th>
+        <th scope="col" class="text-center">Заболевание</th>
+        <th scope="col" class="text-center">Возраст</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let patient of patients$ | async; index as i">
+        <th  scope="row" class="text-center">{{i + 1}}</th>
+        <td  class="text-center">{{patient.lastName}}</td>
+        <td  class="text-center">{{patient.firstName}}</td>
+        <td  class="text-center">{{patient.patronymic}}</td>
+        <td  class="text-center">{{patient.disease}}</td>
+        <td  class="text-center">{{patient.age}}</td>
+    </tr>
+    </tbody>
+</table>
+<div>
+    <button routerLink="/" class=" mx-1 btn btn-primary">Назад</button>
+</div>

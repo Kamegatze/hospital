@@ -1,0 +1,61 @@
+<form [formGroup]="doctorForm" class="d-flex flex-column align-items-center">
+  <div class="w-25 my-3">
+    <label class="form-label">Исправьте фамилие</label>
+    <input formControlName="lastName" type="text" class="form-control">
+    <p *ngIf="doctorForm.get('lastName')?.invalid && doctorForm.get('lastName')?.touched"
+            class="text-danger"
+    >Фамилие должно быть больше 1 символа и содержать только буквы русского алфавита</p>
+  </div>
+  <div class="w-25 my-3">
+    <label class="form-label">Исправьте имя</label>
+    <input formControlName="firstName" type="text" class="form-control">
+    <p *ngIf="doctorForm.get('firstName')?.invalid && doctorForm.get('firstName')?.touched"
+            class="text-danger"
+    >Имя должно быть больше 1 символа и содержать только буквы русского алфавита</p>
+  </div>
+  <div class="w-25 my-3">
+    <label class="form-label">Исправьте отчество</label>
+    <input formControlName="patronymic" type="text" class="form-control">
+    <p *ngIf="doctorForm.get('patronymic')?.invalid && doctorForm.get('patronymic')?.touched"
+            class="text-danger"
+    >Отчество должно быть больше 1 символа и содержать только буквы русского алфавита</p>
+  </div>
+  <div class="w-25 my-3">
+    <label class="form-label">Исправьте должность</label>
+    <input formControlName="post" type="text" class="form-control">
+    <p *ngIf="doctorForm.get('post')?.invalid && doctorForm.get('post')?.touched"
+       class="text-danger"
+    >Должность должно быть больше 3 символа и содержать только буквы русского алфавита</p>
+  </div>
+  <div class="w-25 my-3">
+    <label class="form-label">Исправьте начало время приема</label>
+    <div class="d-flex">
+      <input formControlName="jobTimeBeginHour" type="text" class="form-control">
+      <div>:</div>
+      <input formControlName="jobTimeBeginMinute" type="text" class="form-control">
+    </div>
+    <p *ngIf="correctionJobTimeBegin()"
+            class="text-danger"
+    >В каждом поле ввода должно содержаться две цифры.
+      Например: 13:00 или 14:35</p>
+  </div>
+  <div class="w-25 my-3">
+    <label class="form-label">Исправьте конец время приема</label>
+    <div class="d-flex">
+      <input formControlName="jobTimeEndHour" type="text" class="form-control">
+      <div>:</div>
+      <input formControlName="jobTimeEndMinute" type="text" class="form-control">
+    </div>
+    <p *ngIf="correctionJobTimeEnd()"
+            class="text-danger"
+    >В каждом поле ввода должно содержаться две цифры.
+      Например: 13:00 или 14:35</p>
+  </div>
+  <div>
+    <button [disabled]="doctorForm.invalid"
+            (click)="update()"
+            type="button"
+            class="btn btn-primary">Обновить данные</button>
+  </div>
+</form>
+

@@ -1,0 +1,35 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col" class="text-center">№</th>
+    <th scope="col" class="text-center">Фамилие</th>
+    <th scope="col" class="text-center">Имя</th>
+    <th scope="col" class="text-center">Отчество</th>
+    <th scope="col" class="text-center">Должность</th>
+    <th scope="col" class="text-center">Начало приема</th>
+    <th scope="col" class="text-center">Конец приема</th>
+    <th scope="col" class="text-center">Действия</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let doctor of doctors$ | async; index as i">
+    <th [routerLink]="'../under-table/' + doctor.id" scope="row" class="text-center">{{i + 1}}</th>
+    <td [routerLink]="'../under-table/' + doctor.id" class="text-center">{{doctor.lastName}}</td>
+    <td [routerLink]="'../under-table/' + doctor.id" class="text-center">{{doctor.firstName}}</td>
+    <td [routerLink]="'../under-table/' + doctor.id" class="text-center">{{doctor.patronymic}}</td>
+    <td [routerLink]="'../under-table/' + doctor.id" class="text-center">{{doctor.post}}</td>
+    <td [routerLink]="'../under-table/' + doctor.id" class="text-center">{{doctor.jobTimeBegin}}</td>
+    <td [routerLink]="'../under-table/' + doctor.id" class="text-center">{{doctor.jobTimeEnd}}</td>
+    <td>
+      <div class="d-flex justify-content-center">
+        <div class="mx-1" (click)="remove(doctor.id)"><button class="btn btn-danger">Удалить</button> </div>
+        |
+        <div class="mx-1"><button [routerLink]="'../update-data/' + doctor.id" class="btn btn-success">Обновить</button></div>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<div>
+  <button routerLink="../addition-data" class="btn btn-primary mx-1">Добавить Врача</button>
+</div>
