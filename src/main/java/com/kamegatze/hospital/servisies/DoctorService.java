@@ -47,8 +47,8 @@ public class DoctorService {
         this.doctorRepository.save(doctor);
     }
     @Transactional
-    public void deleteDoctor(Doctor doctor) {
-        this.doctorRepository.delete(doctor);
+    public void deleteDoctor(Integer id) {
+        this.doctorRepository.deleteById(id);
     }
 
     public DoctorDTO findDoctorByPost(String post) throws Exception {
@@ -56,7 +56,9 @@ public class DoctorService {
 
         DoctorDTO doctorDTO = new DoctorDTO();
         doctorDTO.setId(doctor.getId());
-        doctorDTO.setName(doctor.getName());
+        doctorDTO.setFirstName(doctor.getFirstName());
+        doctorDTO.setLastName(doctor.getLastName());
+        doctorDTO.setPatronymic(doctor.getPatronymic());
         doctorDTO.setPost(doctor.getPost());
         doctorDTO.setJobTimeBegin(doctor.getJobTimeBegin());
         doctorDTO.setJobTimeEnd(doctor.getJobTimeEnd());

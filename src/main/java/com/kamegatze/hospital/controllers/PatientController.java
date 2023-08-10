@@ -6,6 +6,7 @@ import com.kamegatze.hospital.servisies.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 
@@ -45,8 +46,8 @@ public class PatientController {
         patientService.updatePatient(patient);
     }
 
-    @DeleteMapping()
-    public void removePatient(@RequestBody Patient patient) {
-        patientService.removePatient(patient);
+    @DeleteMapping("/{id}")
+    public void removePatient(@PathVariable Integer id) {
+        patientService.removePatient(id);
     }
 }

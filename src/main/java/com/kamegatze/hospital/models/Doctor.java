@@ -1,7 +1,9 @@
 package com.kamegatze.hospital.models;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -13,10 +15,18 @@ import java.util.Objects;
 @Entity
 @Getter
 @Table(name = "Doctor")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Doctor extends Essence{
     @Setter
-    @Column(name = "name")
-    private String name;
+    @Column(name = "first_name")
+    private String firstName;
+    @Setter
+    @Column(name = "last_name")
+    private String lastName;
+    @Setter
+    @Column(name = "patronymic")
+    private String patronymic;
     @Setter
     @Column(name = "post")
     private String post;
@@ -26,23 +36,13 @@ public class Doctor extends Essence{
     @Setter
     @Column(name = "job_time_end")
     private Time jobTimeEnd;
+
     @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name = "Doctor_Patient",
+    @JoinTable(name = "doctor_patient",
             joinColumns = @JoinColumn(name = "doctor_id"),
             inverseJoinColumns = @JoinColumn(name = "patient_id"))
     private List<Patient> patients;
 
-    public Doctor() {
-    }
-
-    public Doctor(int id, String name, String post, Time jobTimeBegin, Time jobTimeEnd, List<Patient> patients) {
-        this.setId(id);
-        this.name = name;
-        this.post = post;
-        this.jobTimeBegin = jobTimeBegin;
-        this.jobTimeEnd = jobTimeEnd;
-        this.patients = patients;
-    }
 
     public void setPatients(List<Patient> patients) {
         if(this.patients == null) {
@@ -68,17 +68,5 @@ public class Doctor extends Essence{
     public void removePatient(Patient patient) {
         this.patients.remove(patient);
         patient.getDoctors().remove(this);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Doctor )) return false;
-        return getId() != null && getId().equals( ((Doctor) o).getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getName(), getPost(), getJobTimeBegin(), getJobTimeEnd(), getPatients());
     }
 }

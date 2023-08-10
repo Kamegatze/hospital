@@ -48,8 +48,8 @@ public class DoctorController {
         this.doctorService.updateDoctor(doctor);
     }
 
-    @DeleteMapping()
-    public void deleteDoctor(@RequestBody Doctor doctor) {
-        this.doctorService.deleteDoctor(doctor);
+    @DeleteMapping("/{id}")
+    public void deleteDoctor(@PathVariable Integer id) {
+        this.doctorService.deleteDoctor(id);
     }
 }

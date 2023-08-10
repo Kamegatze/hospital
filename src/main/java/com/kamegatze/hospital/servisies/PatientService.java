@@ -49,7 +49,7 @@ public class PatientService {
         patientRepository.save(patient);
     }
     @Transactional
-    public void removePatient(Patient patient) {
-        patientRepository.delete(patient);
+    public void removePatient(Integer id) {
+        patientRepository.deleteById(id);
     }
 }

@@ -1,6 +1,8 @@
 package com.kamegatze.hospital.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -11,10 +13,18 @@ import java.util.Objects;
 @Entity
 @Getter
 @Table(name = "Patient")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Patient extends Essence{
     @Setter
-    @Column(name = "name")
-    private String name;
+    @Column(name = "first_name")
+    private String firstName;
+    @Setter
+    @Column(name = "last_name")
+    private String lastName;
+    @Setter
+    @Column(name = "patronymic")
+    private String patronymic;
     @Setter
     @Column(name = "disease")
     private String disease;
@@ -24,16 +34,6 @@ public class Patient extends Essence{
     @ManyToMany(mappedBy = "patients")
     private List<Doctor> doctors;
 
-    public Patient() {
-    }
-
-    public Patient(int id, String name, String disease, int age, List<Doctor> doctors) {
-        this.setId(id);
-        this.name = name;
-        this.disease = disease;
-        this.age = age;
-        this.doctors = doctors;
-    }
 
     public void setDoctors(List<Doctor> doctors) {
         if (this.doctors == null) {
@@ -60,16 +60,4 @@ public class Patient extends Essence{
         doctor.getPatients().remove(this);
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Patient)) return false;
-        return getId() != null && getId().equals(((Patient) o).getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getName(), getDisease(), getAge(), getDoctors());
-    }
 }
