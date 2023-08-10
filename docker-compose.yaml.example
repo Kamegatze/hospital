@@ -1,0 +1,17 @@
+version: '3.5'
+
+services:
+  postgres:
+    container_name: hospital_db
+    environment:
+      - POSTGRES_USER={your user}
+      - POSTGRES_PASSWORD={your password}
+      - POSTGRES_DB=hospital
+    image: postgres:13.11-bullseye
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_hospital:{your path}
+
+volumes:
+  postgres_hospital:
