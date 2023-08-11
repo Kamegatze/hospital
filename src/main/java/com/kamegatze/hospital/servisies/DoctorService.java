@@ -1,5 +1,6 @@
 package com.kamegatze.hospital.servisies;
 
+import com.kamegatze.hospital.DTO.DoctorDTO;
 import com.kamegatze.hospital.DTO.DoctorDTOList;
 import com.kamegatze.hospital.repositories.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,22 +29,39 @@ public class DoctorService {
         //форматирование данных под нужный формат
         DoctorDTOList doctorDTOList = new DoctorDTOList();
         doctorDTOList = doctorDTOList.getDoctorDTOList(List.of(doctor)).get(0);
-        doctorDTOList.setPatientDTOLists(doctor.getPatients());
+        doctorDTOList.setPatientsDTOS(doctor.getPatients());
 
         return doctorDTOList;
     }
 
-    public Doctor lastDoctor () {
-        return this.doctorRepository.findLastRecord();
+    public DoctorDTOList lastDoctor () {
+        Doctor doctor = this.doctorRepository.findLastRecord();
+
+        DoctorDTOList doctorDTOList = new DoctorDTOList();
+
+        doctorDTOList.setId(doctor.getId());
+        doctorDTOList.setLastName(doctor.getLastName());
+        doctorDTOList.setFirstName(doctor.getFirstName());
+        doctorDTOList.setPatronymic(doctor.getPatronymic());
+        doctorDTOList.setPost(doctor.getPost());
+        doctorDTOList.setJobTimeBegin(doctor.getJobTimeBegin());
+        doctorDTOList.setJobTimeEnd(doctor.getJobTimeEnd());
+        doctorDTOList.setPatientsDTOS(doctor.getPatients());
+
+        return doctorDTOList;
     }
     @Transactional
-    public void addDoctor(Doctor doctor) {
-        this.doctorRepository.save(doctor);
-    }
-    @Transactional
-    public void updateDoctor(Doctor doctor) {
-        Doctor doctorTemp = this.doctorRepository.getReferenceById(doctor.getId());
-        doctor.setPatients(doctorTemp.getPatients());
+    public void addAndUpdateDoctor(DoctorDTO doctorDTO) {
+
+        Doctor doctor = new Doctor();
+        doctor.setId(doctorDTO.getId());
+        doctor.setFirstName(doctorDTO.getFirstName());
+        doctor.setLastName(doctorDTO.getLastName());
+        doctor.setPatronymic(doctorDTO.getPatronymic());
+        doctor.setPost(doctorDTO.getPost());
+        doctor.setJobTimeBegin(doctorDTO.getJobTimeBegin());
+        doctor.setJobTimeEnd(doctorDTO.getJobTimeEnd());
+
         this.doctorRepository.save(doctor);
     }
     @Transactional
@@ -62,7 +80,7 @@ public class DoctorService {
         doctorDTOList.setPost(doctor.getPost());
         doctorDTOList.setJobTimeBegin(doctor.getJobTimeBegin());
         doctorDTOList.setJobTimeEnd(doctor.getJobTimeEnd());
-        doctorDTOList.setPatientDTOLists(doctor.getPatients());
+        doctorDTOList.setPatientsDTOS(doctor.getPatients());
 
         return doctorDTOList;
     }

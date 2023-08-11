@@ -1,18 +1,17 @@
 package com.kamegatze.hospital.models;
 
+import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @MappedSuperclass
 public class Essence {
     @Id
-    @Setter
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

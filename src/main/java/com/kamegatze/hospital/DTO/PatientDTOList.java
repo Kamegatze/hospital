@@ -1,35 +1,33 @@
 package com.kamegatze.hospital.DTO;
 
 import com.kamegatze.hospital.models.Patient;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import com.kamegatze.hospital.models.Doctor;
 
-@Getter
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class PatientDTOList {
-    @Setter
+    
     private int id;
-    @Setter
+    
     private String firstName;
-    @Setter
+    
     private String lastName;
-    @Setter
+    
     private String patronymic;
-    @Setter
+    
     private String disease;
-    @Setter
+    
     private int age;
-    @Setter
-    private List<DoctorDTOList> doctorDTOLists;
+    
+    private List<DoctorDTOList> doctorDTOS;
 
-    public List<PatientDTOList> getPatientDTOToList(List<Patient> patients) {
+    public List<PatientDTOList> getPatientDTOList(List<Patient> patients) {
         List<PatientDTOList> patientDTOLists = new ArrayList<>();
         for (Patient patient: patients) {
             PatientDTOList patientDTOList = new PatientDTOList(patient.getId(), patient.getFirstName(),
@@ -53,6 +51,6 @@ public class PatientDTOList {
                     doctor.getJobTimeEnd(), null);
             doctorDTOList.add(doctorDTO);
         }
-        this.doctorDTOLists = doctorDTOList;
+        this.doctorDTOS = doctorDTOList;
     }
 }

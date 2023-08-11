@@ -1,5 +1,6 @@
 package com.kamegatze.hospital.controllers;
 
+import com.kamegatze.hospital.DTO.DoctorDTO;
 import com.kamegatze.hospital.DTO.DoctorDTOList;
 import com.kamegatze.hospital.servisies.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class DoctorController {
         this.doctorService = doctorService;
     }
 
-    @GetMapping()
+    @GetMapping("/")
     public List<DoctorDTOList> getAll() {
         return doctorService.getAll();
     }
@@ -29,7 +30,7 @@ public class DoctorController {
     }
 
     @GetMapping("/last")
-    public Doctor getLastDoctor() {
+    public DoctorDTOList getLastDoctor() {
         return this.doctorService.lastDoctor();
     }
 
@@ -38,14 +39,14 @@ public class DoctorController {
         return this.doctorService.findDoctorByPost(post);
     }
 
-    @PostMapping()
-    public void addDoctor(@RequestBody Doctor doctor) {
-        this.doctorService.addDoctor(doctor);
+    @PostMapping("/")
+    public void addDoctor(@RequestBody DoctorDTO doctor) {
+        this.doctorService.addAndUpdateDoctor(doctor);
     }
 
-    @PutMapping()
-    public void updateDoctor(@RequestBody Doctor doctor) {
-        this.doctorService.updateDoctor(doctor);
+    @PutMapping("/")
+    public void updateDoctor(@RequestBody DoctorDTO doctor) {
+        this.doctorService.addAndUpdateDoctor(doctor);
     }
 
     @DeleteMapping("/{id}")

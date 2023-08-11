@@ -1,62 +1,41 @@
 package com.kamegatze.hospital.models;
 
-import com.kamegatze.hospital.DTO.DoctorDTOList;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import javax.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
+import lombok.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+
 @Getter
+@Setter
+@Entity
+@Builder
 @Table(name = "Patient")
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class Patient extends Essence{
-    @Setter
+    
     @Column(name = "first_name")
     private String firstName;
-    @Setter
+    
     @Column(name = "last_name")
     private String lastName;
-    @Setter
+    
     @Column(name = "patronymic")
     private String patronymic;
-    @Setter
+    
     @Column(name = "disease")
     private String disease;
-    @Setter
+    
     @Column(name = "age")
     private int age;
     @ManyToMany(mappedBy = "patients")
     private List<Doctor> doctors = new ArrayList<>();
-
-    public void setDoctors(List<Doctor> doctors) {
-        if (this.doctors == null) {
-            this.doctors = doctors;
-            return;
-        }
-        this.doctors.addAll(doctors);
-
-        for (Doctor doctor:doctors) {
-            doctor.getPatients().add(this);
-        }
-    }
-    public void setDoctor(Doctor doctor) {
-        if (this.doctors == null) {
-            this.doctors = new ArrayList<>(List.of(doctor));
-            return;
-        }
-        doctors.add(doctor);
-        doctor.getPatients().add(this);
-    }
-
-    public void removeDoctor(Doctor doctor) {
-        this.doctors.remove(doctor);
-        doctor.getPatients().remove(this);
-    }
-
+    
 }
