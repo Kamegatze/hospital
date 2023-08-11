@@ -8,5 +8,5 @@ export interface Doctor {
   post:string,
   jobTimeBegin:string,
   jobTimeEnd:string
-  patientDTOS:Patient[]
+  patientDTOS:Patient[]|null
 }

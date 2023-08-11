@@ -10,7 +10,7 @@ import {ActivatedRoute, Route} from "@angular/router";
   styleUrls: ['./under-table.component.scss']
 })
 export class UnderTableComponent implements OnInit, OnDestroy{
-  protected patients$!:Observable<Patient[]>;
+  protected patients$!:Observable<Patient[] | null>;
   private routeSubscription!:Subscription;
   private doctorSubscription!:Subscription;
 
@@ -32,7 +32,7 @@ export class UnderTableComponent implements OnInit, OnDestroy{
         .subscribe((params) => id = params?.["id"])
 
     this.doctorSubscription = this.doctorsService.doctorById(id)
-        .subscribe(doctor => this.patients$ = of(doctor.patientDTOS))
+        .subscribe(doctor => this.patients$ = of<Patient[] | null>(doctor.patientDTOS))
   }
 
 }

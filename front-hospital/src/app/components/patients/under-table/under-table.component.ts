@@ -16,6 +16,8 @@ export class UnderTableComponent implements OnInit, OnDestroy{
   private patientSubscription!:Subscription
 
   private routeSubscription!:Subscription;
+
+  protected id!:number;
   constructor(
     private patientsService: PatientsService,
     private route: ActivatedRoute,
@@ -30,9 +32,13 @@ export class UnderTableComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
 
     this.routeSubscription = this.route.params
-      .subscribe((params) =>
-        this.patientSubscription = this.patientsService.patientById(params?.["id"])
-          .subscribe(patient => this.doctors$ = of<Doctor[]>(patient.doctorDTOS))
+      .subscribe((params) => {
+          this.id = params?.["id"];
+          this.patientSubscription = this.patientsService.patientById(params?.["id"])
+            .subscribe(patient => {
+              this.doctors$ = of<Doctor[]>(patient.doctorDTOS);
+            });
+        }
       );
   }
 

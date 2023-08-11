@@ -14,7 +14,7 @@ export class DoctorsService {
 
   public getAll(): Observable<Doctor[]> {
     return this.http.get<Doctor[]>("http://localhost:8080/doctors/")
-      .pipe(delay(200));
+      .pipe(delay(500));
   }
 
   public removeById(id:number) {

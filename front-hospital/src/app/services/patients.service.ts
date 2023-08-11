@@ -17,7 +17,7 @@ export class PatientsService {
   public getAll() : Observable<Patient[]> {
     return this.http.get<Patient[]>("http://localhost:8080/patients/")
       .pipe(
-        delay(200)
+        delay(500)
       );
   }
 
@@ -37,6 +37,11 @@ export class PatientsService {
 
   public patientUpdate(patient:FormGroup<PatientTransfer>) {
     this.http.put("http://localhost:8080/patients/", patient.value)
+      .subscribe();
+  }
+
+  public additionReception(doctorId:number, patientId:number) {
+    this.http.get(`http://localhost:8080/patients/addition-reception?doctorId=${doctorId}&patientId=${patientId}`)
       .subscribe();
   }
 }

@@ -4,6 +4,7 @@ import {TableComponent} from "./table/table.component";
 import {UnderTableComponent} from "./under-table/under-table.component";
 import {AdditionDataComponent} from "./addition-data/addition-data.component";
 import {UpdateDataComponent} from "./update-data/update-data.component";
+import {AdditionReceptionComponent} from "./addition-reception/addition-reception.component";
 
 const routes: Routes = [
   {path:"table", component:TableComponent},
@@ -11,6 +12,8 @@ const routes: Routes = [
   {path:"under-table/:id", component:UnderTableComponent},
   {path:"addition-data", component:AdditionDataComponent},
   {path:"update-data/:id", component:UpdateDataComponent},
+  {path:"under-table/addition-reception/:id", component:AdditionReceptionComponent},
+
 ];
 
 @NgModule({

@@ -59,7 +59,6 @@ export class UpdateDataComponent implements OnInit, OnDestroy{
         Validators.max(100),
         Validators.pattern(/^[0-9]*$/)
       ]),
-      doctorDTOS: new FormControl<Doctor[]>([])
     });
 
     this.routeSubscription = this.route.params
@@ -67,21 +66,22 @@ export class UpdateDataComponent implements OnInit, OnDestroy{
         this.patientSubscription = this.patientService.patientById(params?.["id"])
           .subscribe(patient => {
             const {id, firstName, lastName,
-              patronymic, disease, age, doctorDTOS} = patient;
+              patronymic, disease, age} = patient;
             this.patientForm.setValue(<Patient>{
               id,
               firstName,
               lastName,
               patronymic,
               disease,
-              age,
-              doctorDTOS
+              age
             });
           })
       });
   }
 
   protected submit() {
+
+
     this.patientService.patientUpdate(this.patientForm);
     this.router.navigate(['/patients']);
   }
