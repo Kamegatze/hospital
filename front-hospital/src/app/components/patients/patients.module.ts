@@ -5,17 +5,21 @@ import { PatientsRoutingModule } from './patients-routing.module';
 import { PatientsComponent } from './patients.component';
 import { TableComponent } from './table/table.component';
 import { UnderTableComponent } from './under-table/under-table.component';
+import { AdditionDataComponent } from './addition-data/addition-data.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
   declarations: [
     PatientsComponent,
     TableComponent,
-    UnderTableComponent
+    UnderTableComponent,
+    AdditionDataComponent
   ],
   imports: [
     CommonModule,
-    PatientsRoutingModule
+    PatientsRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class PatientsModule { }
