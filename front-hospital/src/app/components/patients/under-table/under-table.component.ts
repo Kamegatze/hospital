@@ -31,7 +31,7 @@ export class UnderTableComponent implements OnInit, OnDestroy{
 
     this.routeSubscription = this.route.params
       .subscribe((params) =>
-        this.patientSubscription = this.patientsService.patientBuId(params?.["id"])
+        this.patientSubscription = this.patientsService.patientById(params?.["id"])
           .subscribe(patient => this.doctors$ = of<Doctor[]>(patient.doctorDTOS))
       );
   }

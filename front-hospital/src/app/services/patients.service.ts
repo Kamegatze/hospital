@@ -16,7 +16,7 @@ export class PatientsService {
     return this.http.get<Patient[]>("http://localhost:8080/patients/");
   }
 
-  public patientBuId(id:number) : Observable<Patient> {
+  public patientById(id:number) : Observable<Patient> {
     return this.http.get<Patient>(`http://localhost:8080/patients/${id}`)
   }
 
