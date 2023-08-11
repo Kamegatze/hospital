@@ -8,6 +8,7 @@ import { UnderTableComponent } from './under-table/under-table.component';
 import { AdditionDataComponent } from './addition-data/addition-data.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { UpdateDataComponent } from './update-data/update-data.component';
+import { AddtionReceptionComponent } from './addtion-reception/addtion-reception.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { UpdateDataComponent } from './update-data/update-data.component';
     TableComponent,
     UnderTableComponent,
     AdditionDataComponent,
-    UpdateDataComponent
+    UpdateDataComponent,
+    AddtionReceptionComponent
   ],
   imports: [
     CommonModule,
