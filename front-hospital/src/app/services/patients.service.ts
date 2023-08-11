@@ -26,4 +26,9 @@ export class PatientsService {
     this.http.post("http://localhost:8080/patients/", patient.value)
       .subscribe();
   }
+
+  public removeById(id:number) {
+    this.http.delete(`http://localhost:8080/patients/${id}`)
+      .subscribe();
+  }
 }

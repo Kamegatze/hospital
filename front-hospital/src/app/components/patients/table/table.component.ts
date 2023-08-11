@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PatientsService} from "../../../services/patients.service";
-import {Observable} from "rxjs";
+import {map, Observable, of} from "rxjs";
 import {Patient} from "../../../models/patient";
 
 @Component({
@@ -23,6 +23,13 @@ export class TableComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.patients$ = this.patientsService.getAll();
+  }
+
+  protected remove(id:number) {
+    this.patientsService.removeById(id);
+    this.patients$.pipe(
+      map(patients => patients.filter(patient => patient.id != id))
+    ).subscribe(patients => this.patients$ = of<Patient[]>(patients))
   }
 
 }
