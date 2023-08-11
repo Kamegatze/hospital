@@ -25,7 +25,7 @@ public class PatientDTOList {
     @Setter
     private String disease;
     @Setter
-    private long age;
+    private int age;
     @Setter
     private List<DoctorDTOList> doctorDTOLists;
 

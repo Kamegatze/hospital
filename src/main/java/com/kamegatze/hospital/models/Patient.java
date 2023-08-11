@@ -30,28 +30,9 @@ public class Patient extends Essence{
     private String disease;
     @Setter
     @Column(name = "age")
-    private long age;
+    private int age;
     @ManyToMany(mappedBy = "patients")
     private List<Doctor> doctors = new ArrayList<>();
-
-
-    public void setDoctorsDTO(List<DoctorDTOList> doctorDTOLists) {
-        List<Doctor> doctors = new ArrayList<>();
-        for(DoctorDTOList doctorDTOList : doctorDTOLists) {
-            Doctor doctor = new Doctor();
-            doctor.setId(doctorDTOList.getId());
-            doctor.setFirstName(doctorDTOList.getFirstName());
-            doctor.setLastName(doctorDTOList.getLastName());
-            doctor.setPatronymic(doctorDTOList.getPatronymic());
-            doctor.setJobTimeBegin(doctorDTOList.getJobTimeBegin());
-            doctor.setJobTimeEnd(doctorDTOList.getJobTimeEnd());
-            doctor.setPost(doctorDTOList.getPost());
-
-            doctors.add(doctor);
-        }
-
-        setDoctors(doctors);
-    }
 
     public void setDoctors(List<Doctor> doctors) {
         if (this.doctors == null) {
