@@ -35,7 +35,7 @@ export class AdditionDataComponent implements OnInit{
       post: new FormControl<string>('', [
         Validators.required,
         Validators.minLength(4),
-        Validators.pattern(/^[а-яА-я]*$/)
+        Validators.pattern(/^[а-яА-я\s]*$/)
       ]),
       jobTimeBeginHour: new FormControl<string>('',[
         Validators.required,
