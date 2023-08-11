@@ -3,12 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import {TableComponent} from "./table/table.component";
 import {UnderTableComponent} from "./under-table/under-table.component";
 import {AdditionDataComponent} from "./addition-data/addition-data.component";
+import {UpdateDataComponent} from "./update-data/update-data.component";
 
 const routes: Routes = [
   {path:"table", component:TableComponent},
   {path:"", redirectTo:"table", pathMatch:"full"},
   {path:"under-table/:id", component:UnderTableComponent},
   {path:"addition-data", component:AdditionDataComponent},
+  {path:"update-data/:id", component:UpdateDataComponent},
 ];
 
 @NgModule({

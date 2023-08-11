@@ -22,7 +22,7 @@
       <div class="d-flex justify-content-center">
         <div (click)="remove(patient.id)" class="mx-1"><button class="btn btn-danger">Удалить</button> </div>
         |
-        <div class="mx-1"><button class="btn btn-success">Обновить</button></div>
+        <div class="mx-1"><button [routerLink]="'../update-data/' + patient.id" class="btn btn-success">Обновить</button></div>
       </div>
     </td>
   </tr>

@@ -7,6 +7,7 @@ import { TableComponent } from './table/table.component';
 import { UnderTableComponent } from './under-table/under-table.component';
 import { AdditionDataComponent } from './addition-data/addition-data.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import { UpdateDataComponent } from './update-data/update-data.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     PatientsComponent,
     TableComponent,
     UnderTableComponent,
-    AdditionDataComponent
+    AdditionDataComponent,
+    UpdateDataComponent
   ],
   imports: [
     CommonModule,
