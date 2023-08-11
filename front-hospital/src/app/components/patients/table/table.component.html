@@ -1,0 +1,33 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col" class="text-center">№</th>
+    <th scope="col" class="text-center">Фамилие</th>
+    <th scope="col" class="text-center">Имя</th>
+    <th scope="col" class="text-center">Отчество</th>
+    <th scope="col" class="text-center">Заболевание</th>
+    <th scope="col" class="text-center">Возраст</th>
+    <th scope="col" class="text-center">Действия</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let patient of patients$ | async; index as i">
+    <th [routerLink]="'../under-table/' + patient.id" scope="row" class="text-center">{{i + 1}}</th>
+    <td [routerLink]="'../under-table/' + patient.id" class="text-center">{{patient.lastName}}</td>
+    <td [routerLink]="'../under-table/' + patient.id" class="text-center">{{patient.firstName}}</td>
+    <td [routerLink]="'../under-table/' + patient.id" class="text-center">{{patient.patronymic}}</td>
+    <td [routerLink]="'../under-table/' + patient.id" class="text-center">{{patient.disease}}</td>
+    <td [routerLink]="'../under-table/' + patient.id" class="text-center">{{patient.age}}</td>
+    <td>
+      <div class="d-flex justify-content-center">
+        <div class="mx-1"><button class="btn btn-danger">Удалить</button> </div>
+        |
+        <div class="mx-1"><button class="btn btn-success">Обновить</button></div>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<div>
+  <button routerLink="" class=" mx-1 btn btn-primary">Добавить пациента</button>
+</div>

@@ -3,11 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import { PatientsRoutingModule } from './patients-routing.module';
 import { PatientsComponent } from './patients.component';
+import { TableComponent } from './table/table.component';
+import { UnderTableComponent } from './under-table/under-table.component';
 
 
 @NgModule({
   declarations: [
-    PatientsComponent
+    PatientsComponent,
+    TableComponent,
+    UnderTableComponent
   ],
   imports: [
     CommonModule,

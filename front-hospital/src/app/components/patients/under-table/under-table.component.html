@@ -1,0 +1,27 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col" class="text-center">№</th>
+    <th scope="col" class="text-center">Фамилие</th>
+    <th scope="col" class="text-center">Имя</th>
+    <th scope="col" class="text-center">Отчество</th>
+    <th scope="col" class="text-center">Должность</th>
+    <th scope="col" class="text-center">Начало приема</th>
+    <th scope="col" class="text-center">Конец приема</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let doctor of doctors$ | async; index as i">
+    <th scope="row" class="text-center">{{i + 1}}</th>
+    <td class="text-center">{{doctor.lastName}}</td>
+    <td class="text-center">{{doctor.firstName}}</td>
+    <td class="text-center">{{doctor.patronymic}}</td>
+    <td class="text-center">{{doctor.post}}</td>
+    <td class="text-center">{{doctor.jobTimeBegin}}</td>
+    <td class="text-center">{{doctor.jobTimeEnd}}</td>
+  </tr>
+  </tbody>
+</table>
+<div>
+  <button routerLink="/patients" class="btn btn-primary mx-1">Назад</button>
+</div>
