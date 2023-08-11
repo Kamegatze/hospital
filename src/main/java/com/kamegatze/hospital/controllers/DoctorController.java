@@ -1,6 +1,6 @@
 package com.kamegatze.hospital.controllers;
 
-import com.kamegatze.hospital.DTO.DoctorDTO;
+import com.kamegatze.hospital.DTO.DoctorDTOList;
 import com.kamegatze.hospital.servisies.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +19,12 @@ public class DoctorController {
     }
 
     @GetMapping()
-    public List<DoctorDTO> getAll() {
+    public List<DoctorDTOList> getAll() {
         return doctorService.getAll();
     }
 
     @GetMapping("/{id}")
-    public DoctorDTO getDoctor(@PathVariable int id) {
+    public DoctorDTOList getDoctor(@PathVariable int id) {
         return doctorService.getDoctor(id);
     }
 
@@ -34,7 +34,7 @@ public class DoctorController {
     }
 
     @GetMapping("/post")
-    public DoctorDTO getDoctorByPost(@RequestParam String post) throws Exception {
+    public DoctorDTOList getDoctorByPost(@RequestParam String post) throws Exception {
         return this.doctorService.findDoctorByPost(post);
     }
 

@@ -41,7 +41,7 @@ public class Doctor extends Essence{
     @JoinTable(name = "doctor_patient",
             joinColumns = @JoinColumn(name = "doctor_id"),
             inverseJoinColumns = @JoinColumn(name = "patient_id"))
-    private List<Patient> patients;
+    private List<Patient> patients = new ArrayList<>();
 
 
     public void setPatients(List<Patient> patients) {

@@ -1,5 +1,6 @@
 package com.kamegatze.hospital.models;
 
+import com.kamegatze.hospital.DTO.DoctorDTOList;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +9,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Getter
@@ -32,8 +32,26 @@ public class Patient extends Essence{
     @Column(name = "age")
     private long age;
     @ManyToMany(mappedBy = "patients")
-    private List<Doctor> doctors;
+    private List<Doctor> doctors = new ArrayList<>();
 
+
+    public void setDoctorsDTO(List<DoctorDTOList> doctorDTOLists) {
+        List<Doctor> doctors = new ArrayList<>();
+        for(DoctorDTOList doctorDTOList : doctorDTOLists) {
+            Doctor doctor = new Doctor();
+            doctor.setId(doctorDTOList.getId());
+            doctor.setFirstName(doctorDTOList.getFirstName());
+            doctor.setLastName(doctorDTOList.getLastName());
+            doctor.setPatronymic(doctorDTOList.getPatronymic());
+            doctor.setJobTimeBegin(doctorDTOList.getJobTimeBegin());
+            doctor.setJobTimeEnd(doctorDTOList.getJobTimeEnd());
+            doctor.setPost(doctorDTOList.getPost());
+
+            doctors.add(doctor);
+        }
+
+        setDoctors(doctors);
+    }
 
     public void setDoctors(List<Doctor> doctors) {
         if (this.doctors == null) {

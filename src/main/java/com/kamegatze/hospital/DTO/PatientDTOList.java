@@ -10,12 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import com.kamegatze.hospital.models.Doctor;
 
-import javax.persistence.Column;
-
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PatientDTO {
+public class PatientDTOList {
     @Setter
     private int id;
     @Setter
@@ -29,32 +27,32 @@ public class PatientDTO {
     @Setter
     private long age;
     @Setter
-    private List<DoctorDTO> doctorDTOS;
+    private List<DoctorDTOList> doctorDTOLists;
 
-    public List<PatientDTO> getPatientDTOToList(List<Patient> patients) {
-        List<PatientDTO> patientDTOS = new ArrayList<>();
+    public List<PatientDTOList> getPatientDTOToList(List<Patient> patients) {
+        List<PatientDTOList> patientDTOLists = new ArrayList<>();
         for (Patient patient: patients) {
-            PatientDTO patientDTO = new PatientDTO(patient.getId(), patient.getFirstName(),
+            PatientDTOList patientDTOList = new PatientDTOList(patient.getId(), patient.getFirstName(),
                     patient.getLastName(), patient.getPatronymic(),
                     patient.getDisease(), patient.getAge(), null);
 
-            patientDTO.setDoctorsDTOS(patient.getDoctors());
+            patientDTOList.setDoctorsDTOS(patient.getDoctors());
 
-            patientDTOS.add(patientDTO);
+            patientDTOLists.add(patientDTOList);
         }
-        return patientDTOS;
+        return patientDTOLists;
     }
 
 
     public void setDoctorsDTOS(List<Doctor> doctors) {
-        List<DoctorDTO> doctorDTOList = new ArrayList<>();
+        List<DoctorDTOList> doctorDTOList = new ArrayList<>();
         for (Doctor doctor: doctors) {
-            DoctorDTO doctorDTO = new DoctorDTO(doctor.getId(), doctor.getFirstName(),
+            DoctorDTOList doctorDTO = new DoctorDTOList(doctor.getId(), doctor.getFirstName(),
                         doctor.getLastName(), doctor.getPatronymic(),
                         doctor.getPost(), doctor.getJobTimeBegin(),
                     doctor.getJobTimeEnd(), null);
             doctorDTOList.add(doctorDTO);
         }
-        this.doctorDTOS = doctorDTOList;
+        this.doctorDTOLists = doctorDTOList;
     }
 }

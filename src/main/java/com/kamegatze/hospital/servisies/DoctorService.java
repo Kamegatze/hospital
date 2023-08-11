@@ -1,6 +1,6 @@
 package com.kamegatze.hospital.servisies;
 
-import com.kamegatze.hospital.DTO.DoctorDTO;
+import com.kamegatze.hospital.DTO.DoctorDTOList;
 import com.kamegatze.hospital.repositories.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,19 +18,19 @@ public class DoctorService {
         this.doctorRepository = doctorRepository;
     }
 
-    public List<DoctorDTO> getAll() {
-        DoctorDTO doctorDTO = new DoctorDTO();
-        return doctorDTO.getDoctorDTOList(doctorRepository.findAll());
+    public List<DoctorDTOList> getAll() {
+        DoctorDTOList doctorDTOList = new DoctorDTOList();
+        return doctorDTOList.getDoctorDTOList(doctorRepository.findAll());
     }
 
-    public DoctorDTO getDoctor(int id) {
+    public DoctorDTOList getDoctor(int id) {
         Doctor doctor = this.doctorRepository.getReferenceById(id);
         //форматирование данных под нужный формат
-        DoctorDTO doctorDTO = new DoctorDTO();
-        doctorDTO = doctorDTO.getDoctorDTOList(List.of(doctor)).get(0);
-        doctorDTO.setPatientDTOS(doctor.getPatients());
+        DoctorDTOList doctorDTOList = new DoctorDTOList();
+        doctorDTOList = doctorDTOList.getDoctorDTOList(List.of(doctor)).get(0);
+        doctorDTOList.setPatientDTOLists(doctor.getPatients());
 
-        return doctorDTO;
+        return doctorDTOList;
     }
 
     public Doctor lastDoctor () {
@@ -51,19 +51,19 @@ public class DoctorService {
         this.doctorRepository.deleteById(id);
     }
 
-    public DoctorDTO findDoctorByPost(String post) throws Exception {
+    public DoctorDTOList findDoctorByPost(String post) throws Exception {
         Doctor doctor = doctorRepository.findDoctorByPost(post).orElseThrow(() -> new Exception("These doctors does not exist"));
 
-        DoctorDTO doctorDTO = new DoctorDTO();
-        doctorDTO.setId(doctor.getId());
-        doctorDTO.setFirstName(doctor.getFirstName());
-        doctorDTO.setLastName(doctor.getLastName());
-        doctorDTO.setPatronymic(doctor.getPatronymic());
-        doctorDTO.setPost(doctor.getPost());
-        doctorDTO.setJobTimeBegin(doctor.getJobTimeBegin());
-        doctorDTO.setJobTimeEnd(doctor.getJobTimeEnd());
-        doctorDTO.setPatientDTOS(doctor.getPatients());
+        DoctorDTOList doctorDTOList = new DoctorDTOList();
+        doctorDTOList.setId(doctor.getId());
+        doctorDTOList.setFirstName(doctor.getFirstName());
+        doctorDTOList.setLastName(doctor.getLastName());
+        doctorDTOList.setPatronymic(doctor.getPatronymic());
+        doctorDTOList.setPost(doctor.getPost());
+        doctorDTOList.setJobTimeBegin(doctor.getJobTimeBegin());
+        doctorDTOList.setJobTimeEnd(doctor.getJobTimeEnd());
+        doctorDTOList.setPatientDTOLists(doctor.getPatients());
 
-        return doctorDTO;
+        return doctorDTOList;
     }
 }

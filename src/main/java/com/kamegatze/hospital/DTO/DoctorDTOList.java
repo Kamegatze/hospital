@@ -8,12 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import com.kamegatze.hospital.models.Doctor;
 
-import javax.persistence.Column;
-
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DoctorDTO {
+public class DoctorDTOList {
     @Setter
     private int id;
     @Setter
@@ -29,31 +27,31 @@ public class DoctorDTO {
     @Setter
     private Time jobTimeEnd;
 
-    private List<PatientDTO> patientDTOS;
-    public List<DoctorDTO> getDoctorDTOList(List<Doctor> doctors) {
-        List<DoctorDTO> doctorDTOS = new ArrayList<>();
+    private List<PatientDTOList> patientDTOLists;
+    public List<DoctorDTOList> getDoctorDTOList(List<Doctor> doctors) {
+        List<DoctorDTOList> doctorDTOLists = new ArrayList<>();
         for(Doctor doctor: doctors) {
-            DoctorDTO doctorDTO = new DoctorDTO(doctor.getId(), doctor.getFirstName(),
+            DoctorDTOList doctorDTOList = new DoctorDTOList(doctor.getId(), doctor.getFirstName(),
                     doctor.getLastName(), doctor.getPatronymic(),
                     doctor.getPost(), doctor.getJobTimeBegin(),
                     doctor.getJobTimeEnd(), null);
 
-            doctorDTO.setPatientDTOS(doctor.getPatients());
+            doctorDTOList.setPatientDTOLists(doctor.getPatients());
 
-            doctorDTOS.add(doctorDTO);
+            doctorDTOLists.add(doctorDTOList);
         }
-        return doctorDTOS;
+        return doctorDTOLists;
     }
 
-    public void setPatientDTOS(List<Patient> patients) {
-        List<PatientDTO> patientDTOList = new ArrayList<>();
+    public void setPatientDTOLists(List<Patient> patients) {
+        List<PatientDTOList> patientDTOList = new ArrayList<>();
         for (Patient patient: patients) {
-            PatientDTO patientDTO = new PatientDTO(patient.getId(), patient.getFirstName(),
+            PatientDTOList patientDTO = new PatientDTOList(patient.getId(), patient.getFirstName(),
                         patient.getLastName(), patient.getPatronymic(),
                         patient.getDisease(), patient.getAge(), null);
             patientDTOList.add(patientDTO);
         }
-        this.patientDTOS = patientDTOList;
+        this.patientDTOLists = patientDTOList;
     }
 
 }

@@ -1,7 +1,7 @@
 package com.kamegatze.hospital.servisies;
 
 
-import com.kamegatze.hospital.DTO.PatientDTO;
+import com.kamegatze.hospital.DTO.PatientDTOList;
 import com.kamegatze.hospital.models.Patient;
 import com.kamegatze.hospital.repositories.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,33 +21,49 @@ public class PatientService {
         this.patientRepository = patientRepository;
     }
 
-    public List<PatientDTO> getAll() {
-        PatientDTO patientDTO = new PatientDTO();
-        return patientDTO.getPatientDTOToList(patientRepository.findAll());
+    public List<PatientDTOList> getAll() {
+        PatientDTOList patientDTOList = new PatientDTOList();
+        return patientDTOList.getPatientDTOToList(patientRepository.findAll());
     }
 
-    public PatientDTO getById(int id) {
+    public PatientDTOList getById(int id) {
         Patient patient = this.patientRepository.getReferenceById(id);
-        //форматирование данных под нужный формат
-        PatientDTO patientDTO = new PatientDTO();
-        patientDTO = patientDTO.getPatientDTOToList(List.of(patient)).get(0);
-        patientDTO.setDoctorsDTOS(patient.getDoctors());
 
-        return patientDTO;
+        PatientDTOList patientDTOList = new PatientDTOList();
+        patientDTOList = patientDTOList.getPatientDTOToList(List.of(patient)).get(0);
+        patientDTOList.setDoctorsDTOS(patient.getDoctors());
+
+        return patientDTOList;
     }
 
-    public Patient lastPatient () {
-        return this.patientRepository.findLastRecord();
+    public PatientDTOList lastPatient () {
+        Patient patient = this.patientRepository.findLastRecord();
+        PatientDTOList patientDTOList = new PatientDTOList();
+
+        patientDTOList.setId(patient.getId());
+        patientDTOList.setFirstName(patient.getFirstName());
+        patientDTOList.setPatronymic(patient.getPatronymic());
+        patientDTOList.setLastName(patient.getLastName());
+        patientDTOList.setDisease(patient.getDisease());
+        patientDTOList.setAge(patient.getAge());
+        patientDTOList.setDoctorsDTOS(patient.getDoctors());
+
+        return patientDTOList;
     }
     @Transactional
-    public void addPatient(Patient patient) {
+    public void addAndUpdatePatient(PatientDTOList patientDTOList) {
+        Patient patient = new Patient();
+
+        patient.setId(patientDTOList.getId());
+        patient.setFirstName(patientDTOList.getFirstName());
+        patient.setPatronymic(patientDTOList.getPatronymic());
+        patient.setLastName(patientDTOList.getLastName());
+        patient.setDisease(patientDTOList.getDisease());
+        patient.setAge(patientDTOList.getAge());
+
         patientRepository.save(patient);
     }
 
-    @Transactional
-    public void updatePatient(Patient patient) {
-        patientRepository.save(patient);
-    }
     @Transactional
     public void removePatient(Integer id) {
         patientRepository.deleteById(id);

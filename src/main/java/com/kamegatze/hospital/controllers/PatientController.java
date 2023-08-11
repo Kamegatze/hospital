@@ -1,12 +1,10 @@
 package com.kamegatze.hospital.controllers;
 
-import com.kamegatze.hospital.DTO.PatientDTO;
-import com.kamegatze.hospital.models.Patient;
+import com.kamegatze.hospital.DTO.PatientDTOList;
 import com.kamegatze.hospital.servisies.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 
@@ -22,28 +20,28 @@ public class PatientController {
     }
 
     @GetMapping()
-    public List<PatientDTO> getAll() {
+    public List<PatientDTOList> getAll() {
         return patientService.getAll();
     }
 
     @GetMapping("/{id}")
-    public PatientDTO getById(@PathVariable int id) {
+    public PatientDTOList getById(@PathVariable int id) {
         return patientService.getById(id);
     }
 
     @GetMapping("/last")
-    public Patient lastPatient() {
+    public PatientDTOList lastPatient() {
         return this.patientService.lastPatient();
     }
 
     @PostMapping()
-    public void addPatient(@RequestBody Patient patient) {
-        patientService.addPatient(patient);
+    public void addPatient(@RequestBody PatientDTOList patient) throws Exception {
+        patientService.addAndUpdatePatient(patient);
     }
 
     @PutMapping()
-    public void updatePatient(@RequestBody Patient patient) {
-        patientService.updatePatient(patient);
+    public void updatePatient(@RequestBody PatientDTOList patient) throws Exception {
+        patientService.addAndUpdatePatient(patient);
     }
 
     @DeleteMapping("/{id}")
