@@ -40,6 +40,6 @@ export class AdditionReceptionComponent implements OnInit, OnDestroy{
 
     this.patientService.additionReception(id, this.id);
 
-    this.router.navigate(["/patients"]);
+    this.router.navigate([`/patients/under-table/${this.id}`]);
   }
 }

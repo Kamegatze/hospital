@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Observable, of, Subscription} from "rxjs";
+import {map, Observable, of, Subscription} from "rxjs";
 import {Doctor} from "../../../models/doctor";
 import {PatientsService} from "../../../services/patients.service";
 import {ActivatedRoute} from "@angular/router";
@@ -42,4 +42,16 @@ export class UnderTableComponent implements OnInit, OnDestroy{
       );
   }
 
+  cancellationOfReception(id: number) {
+    this.patientsService.cancellationOfReception(id, this.id)
+
+    this.doctors$
+      .pipe(
+        map((doctors) => doctors
+          .filter(doctor => doctor.id !== id)
+        )
+      )
+      .subscribe((doctors) => this.doctors$ = of<Doctor[]>(doctors))
+
+  }
 }

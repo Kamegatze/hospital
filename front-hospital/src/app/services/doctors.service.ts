@@ -28,7 +28,10 @@ export class DoctorsService {
   }
 
   public doctorById(id:number) : Observable<Doctor> {
-    return this.http.get<Doctor>(`http://localhost:8080/doctors/${id}`);
+    return this.http.get<Doctor>(`http://localhost:8080/doctors/${id}`)
+      .pipe(
+        delay(500)
+      );
   }
 
   public doctorAddition(doctor: Doctor) {

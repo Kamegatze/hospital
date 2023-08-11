@@ -23,6 +23,9 @@ export class PatientsService {
 
   public patientById(id:number) : Observable<Patient> {
     return this.http.get<Patient>(`http://localhost:8080/patients/${id}`)
+      .pipe(
+        delay(500)
+      );
   }
 
   public patientAddition(patient:FormGroup<PatientTransfer>) {
@@ -42,6 +45,11 @@ export class PatientsService {
 
   public additionReception(doctorId:number, patientId:number) {
     this.http.get(`http://localhost:8080/patients/addition-reception?doctorId=${doctorId}&patientId=${patientId}`)
+      .subscribe();
+  }
+
+  cancellationOfReception(doctorId: number, patientId: number) {
+    this.http.get(`http://localhost:8080/patients/cancel-of-reception?doctorId=${doctorId}&patientId=${patientId}`)
       .subscribe();
   }
 }
