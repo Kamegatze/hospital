@@ -6,5 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  protected doctorActive:boolean = true;
+  protected patientActive:boolean = false;
 
+  protected changeDoctor() {
+    this.doctorActive = !this.doctorActive;
+    this.patientActive = !this.patientActive;
+  }
+
+  protected changePatient() {
+    this.patientActive = !this.patientActive;
+    this.doctorActive = !this.doctorActive;
+  }
 }

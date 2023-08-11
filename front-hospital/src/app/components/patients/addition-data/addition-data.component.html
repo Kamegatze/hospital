@@ -60,7 +60,8 @@
     >Возраст должно быть от 0 до 100</p>
   </div>
   <div>
-    <button (click)="submit()"
+    <button [disabled]="patientForm.invalid"
+            (click)="submit()"
             type="button"
             class="btn btn-primary">Добавить запись</button>
   </div>
