@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {PatientTransfer} from "../../../models/patient-transfer";
 import {PatientsService} from "../../../services/patients.service";
 import {Router} from "@angular/router";
+import {Doctor} from "../../../models/doctor";
 
 @Component({
   selector: 'app-addition-data',
@@ -48,7 +49,8 @@ export class AdditionDataComponent implements OnInit, OnDestroy{
         Validators.min(0),
         Validators.max(100),
         Validators.pattern(/^[0-9]*$/)
-      ])
+      ]),
+      doctorDTOS: new FormControl<Doctor[]>([])
     });
   }
 

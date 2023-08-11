@@ -1,1 +1,67 @@
-<p>update-data works!</p>
+<form [formGroup]="patientForm" class="d-flex flex-column align-items-center">
+  <div class="w-25 my-3">
+    <label class="form-label">Фамилие</label>
+    <input
+      formControlName="lastName"
+      type="text"
+      class="form-control"
+      placeholder="Введите фамилие"
+    >
+    <p *ngIf="patientForm.get('lastName')?.invalid && patientForm.get('lastName')?.touched"
+      class="text-danger"
+    >Фамилие должно быть больше 1 символа и содержать только буквы русского алфавита</p>
+  </div>
+  <div class="w-25 my-3">
+    <label class="form-label">Имя</label>
+    <input
+      formControlName="firstName"
+      type="text"
+      class="form-control"
+      placeholder="Введите имя"
+    >
+    <p *ngIf="patientForm.get('firstName')?.invalid && patientForm.get('firstName')?.touched"
+      class="text-danger"
+    >Имя должно быть больше 1 символа и содержать только буквы русского алфавита</p>
+  </div>
+  <div class="w-25 my-3">
+    <label class="form-label">Отчество</label>
+    <input
+      formControlName="patronymic"
+      type="text"
+      class="form-control"
+      placeholder="Введите отчество"
+    >
+    <p *ngIf="patientForm.get('patronymic')?.invalid && patientForm.get('patronymic')?.touched"
+      class="text-danger"
+    >Отчество должно быть больше 1 символа и содержать только буквы русского алфавита</p>
+  </div>
+  <div class="w-25 my-3">
+    <label class="form-label">Заболевание</label>
+    <input
+      formControlName="disease"
+      type="text"
+      class="form-control"
+      placeholder="Введите заболевание"
+    >
+    <p *ngIf="patientForm.get('disease')?.invalid && patientForm.get('disease')?.touched"
+      class="text-danger"
+    >Заболевание должно быть больше 4 символа и содержать только буквы русского алфавита</p>
+  </div>
+  <div class="w-25 my-3">
+    <label class="form-label">Возраст</label>
+    <input
+      formControlName="age"
+      type="text"
+      class="form-control"
+      placeholder="Введите возраст"
+    >
+    <p *ngIf="patientForm.get('age')?.invalid && patientForm.get('age')?.touched"
+       class="text-danger"
+    >Возраст должно быть от 0 до 100</p>
+  </div>
+  <div>
+    <button (click)="submit()"
+            type="button"
+            class="btn btn-primary">Обновить запись</button>
+  </div>
+</form>

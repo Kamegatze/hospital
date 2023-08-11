@@ -7,8 +7,7 @@
       class="form-control"
       placeholder="Введите фамилие"
     >
-    <p
-      *ngIf="patientForm.get('lastName')?.invalid && patientForm.get('lastName')?.touched"
+    <p *ngIf="patientForm.get('lastName')?.invalid && patientForm.get('lastName')?.touched"
       class="text-danger"
     >Фамилие должно быть больше 1 символа и содержать только буквы русского алфавита</p>
   </div>
@@ -20,8 +19,7 @@
       class="form-control"
       placeholder="Введите имя"
     >
-    <p
-      *ngIf="patientForm.get('firstName')?.invalid && patientForm.get('firstName')?.touched"
+    <p *ngIf="patientForm.get('firstName')?.invalid && patientForm.get('firstName')?.touched"
       class="text-danger"
     >Имя должно быть больше 1 символа и содержать только буквы русского алфавита</p>
   </div>
@@ -33,8 +31,7 @@
       class="form-control"
       placeholder="Введите отчество"
     >
-    <p
-      *ngIf="patientForm.get('patronymic')?.invalid && patientForm.get('patronymic')?.touched"
+    <p *ngIf="patientForm.get('patronymic')?.invalid && patientForm.get('patronymic')?.touched"
       class="text-danger"
     >Отчество должно быть больше 1 символа и содержать только буквы русского алфавита</p>
   </div>
@@ -46,10 +43,9 @@
       class="form-control"
       placeholder="Введите заболевание"
     >
-    <p
-      *ngIf="patientForm.get('disease')?.invalid && patientForm.get('disease')?.touched"
+    <p *ngIf="patientForm.get('disease')?.invalid && patientForm.get('disease')?.touched"
       class="text-danger"
-    >Должность должно быть больше 4 символа и содержать только буквы русского алфавита</p>
+    >Заболевание должно быть больше 4 символа и содержать только буквы русского алфавита</p>
   </div>
   <div class="w-25 my-3">
     <label class="form-label">Возраст</label>

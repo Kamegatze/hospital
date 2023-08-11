@@ -1,4 +1,5 @@
 import {FormControl} from "@angular/forms";
+import {Doctor} from "./doctor";
 
 export interface PatientTransfer {
   id:FormControl<number | null>,
@@ -7,4 +8,5 @@ export interface PatientTransfer {
   patronymic:FormControl<string>,
   disease:FormControl<string>,
   age:FormControl<number>,
+  doctorDTOS:FormControl<Doctor[]>
 }

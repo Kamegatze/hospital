@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {delay, Observable, Subscription, timeout} from "rxjs";
 import {DoctorsService} from "../../../services/doctors.service";
 import {Doctor} from "../../../models/doctor";
+import {Patient} from "../../../models/patient";
 
 @Component({
   selector: 'app-update-data',
@@ -80,6 +81,7 @@ export class UpdateDataComponent implements OnInit, OnDestroy{
             Validators.maxLength(2),
             Validators.pattern(/^[0-9]*$/)
         ]),
+        patientDTOS: new FormControl<Patient[]>([])
     });
 
       this.userSub = this.doctorById$
@@ -97,7 +99,8 @@ export class UpdateDataComponent implements OnInit, OnDestroy{
                 jobTimeBeginHour,
                 jobTimeBeginMinute,
                 jobTimeEndHour,
-                jobTimeEndMinute
+                jobTimeEndMinute,
+                patientDTOS: doctor.patientDTOS
             })
           });
 
@@ -133,10 +136,11 @@ export class UpdateDataComponent implements OnInit, OnDestroy{
         post: String(objectDoctor.post),
         jobTimeBegin: `${objectDoctor.jobTimeBeginHour}:${objectDoctor.jobTimeBeginMinute}:00`,
         jobTimeEnd: `${objectDoctor.jobTimeEndHour}:${objectDoctor.jobTimeEndMinute}:00`,
-        patientDTOS: [],
+        patientDTOS: objectDoctor.patientDTOS,
     }
 
     this.doctorsService.updateUser(doctor);
+
     this.router.navigate(["/"]);
   }
 

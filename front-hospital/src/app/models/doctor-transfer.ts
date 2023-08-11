@@ -1,4 +1,5 @@
 import {FormControl} from "@angular/forms";
+import {Patient} from "./patient";
 
 export interface DoctorTransfer {
   id:FormControl<number | null>,
@@ -9,5 +10,6 @@ export interface DoctorTransfer {
   jobTimeBeginHour:FormControl<string>,
   jobTimeBeginMinute:FormControl<string>,
   jobTimeEndHour:FormControl<string>,
-  jobTimeEndMinute:FormControl<string>
+  jobTimeEndMinute:FormControl<string>,
+  patientDTOS:FormControl<Patient[]>
 }

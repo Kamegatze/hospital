@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {delay, Observable} from "rxjs";
 import {Patient} from "../models/patient";
 import {PatientTransfer} from "../models/patient-transfer";
 import {FormGroup} from "@angular/forms";
@@ -15,7 +15,10 @@ export class PatientsService {
   ) { }
 
   public getAll() : Observable<Patient[]> {
-    return this.http.get<Patient[]>("http://localhost:8080/patients/");
+    return this.http.get<Patient[]>("http://localhost:8080/patients/")
+      .pipe(
+        delay(200)
+      );
   }
 
   public patientById(id:number) : Observable<Patient> {
@@ -29,6 +32,11 @@ export class PatientsService {
 
   public removeById(id:number) {
     this.http.delete(`http://localhost:8080/patients/${id}`)
+      .subscribe();
+  }
+
+  public patientUpdate(patient:FormGroup<PatientTransfer>) {
+    this.http.put("http://localhost:8080/patients/", patient.value)
       .subscribe();
   }
 }

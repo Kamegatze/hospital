@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {delay, Observable} from "rxjs";
 import {Doctor} from "../models/doctor";
 
 @Injectable({
@@ -13,7 +13,8 @@ export class DoctorsService {
   ) { }
 
   public getAll(): Observable<Doctor[]> {
-    return this.http.get<Doctor[]>("http://localhost:8080/doctors/");
+    return this.http.get<Doctor[]>("http://localhost:8080/doctors/")
+      .pipe(delay(200));
   }
 
   public removeById(id:number) {
