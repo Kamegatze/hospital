@@ -48,7 +48,7 @@ public class DoctorService {
     }
 
     @Transactional
-    public void addAndUpdateDoctor(DoctorDTO doctorDTO) {
+    public Doctor addAndUpdateDoctor(DoctorDTO doctorDTO) {
 
         Doctor doctor = Doctor.builder()
                 .firstName(doctorDTO.getFirstName())
@@ -62,7 +62,7 @@ public class DoctorService {
         doctor.setId(doctorDTO.getId());
 
 
-        this.doctorRepository.save(doctor);
+        return this.doctorRepository.save(doctor);
     }
     @Transactional
     public void deleteDoctor(Integer id) {
