@@ -7,10 +7,13 @@ import com.kamegatze.hospital.DTO.EStatus;
 import com.kamegatze.hospital.custom_exceptions.UserNotFoundException;
 import com.kamegatze.hospital.models.Patient;
 import com.kamegatze.hospital.servisies.PatientService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -18,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 
+@Validated
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/patients")
@@ -33,7 +37,8 @@ public class PatientController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PatientDTOList> getById(@PathVariable Integer id) throws UserNotFoundException {
+    public ResponseEntity<PatientDTOList> getById(
+            @Min(value = 1, message = "id must be more 0") @PathVariable Integer id) throws UserNotFoundException {
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(patientService.getPatient(id));
@@ -41,7 +46,7 @@ public class PatientController {
 
     @PostMapping("/")
     public ResponseEntity<Response> addPatient(
-            @RequestBody PatientDTO patient, UriComponentsBuilder uri) {
+            @Valid @RequestBody PatientDTO patient, UriComponentsBuilder uri) {
 
         Patient patientSave = patientService.addAndUpdatePatient(patient);
 
@@ -59,7 +64,7 @@ public class PatientController {
     }
 
     @PutMapping("/")
-    public ResponseEntity<Response> updatePatient(@RequestBody PatientDTO patient) {
+    public ResponseEntity<Response> updatePatient(@Valid @RequestBody PatientDTO patient) {
         patientService.addAndUpdatePatient(patient);
 
         Response response = Response.builder()
@@ -73,7 +78,10 @@ public class PatientController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Response> removePatient(@PathVariable Integer id) throws UserNotFoundException {
+    public ResponseEntity<Response> removePatient(
+            @Min(value = 1, message = "id must be more 0") @PathVariable Integer id)
+            throws UserNotFoundException {
+
         patientService.removePatient(id);
 
         Response response = Response.builder()

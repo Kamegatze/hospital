@@ -4,16 +4,18 @@ import com.kamegatze.hospital.DTO.EStatus;
 import com.kamegatze.hospital.DTO.Response;
 import com.kamegatze.hospital.custom_exceptions.UserNotFoundException;
 import com.kamegatze.hospital.servisies.ReceptionService;
+import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
+@Validated
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/reception")
@@ -23,7 +25,8 @@ public class ReceptionController {
 
     @GetMapping("/addition-reception")
     public ResponseEntity<Response> handleAdditionReception(
-            @RequestParam Integer doctorId, @RequestParam Integer patientId)
+            @Min(value = 1, message = "id must be more 0") @RequestParam Integer doctorId,
+            @Min(value = 1, message = "id must be more 0") @RequestParam Integer patientId)
             throws UserNotFoundException {
 
         this.receptionService.handleAdditionReception(doctorId, patientId);
@@ -40,7 +43,8 @@ public class ReceptionController {
 
     @GetMapping("/cancel-of-reception")
     public ResponseEntity<Response> handleCancellationOfReception(
-            @RequestParam Integer doctorId, @RequestParam Integer patientId)
+            @Min(value = 1, message = "id must be more 0") @RequestParam Integer doctorId,
+            @Min(value = 1, message = "id must be more 0") @RequestParam Integer patientId)
             throws UserNotFoundException {
 
         this.receptionService.handleCancellationOfReception(doctorId, patientId);

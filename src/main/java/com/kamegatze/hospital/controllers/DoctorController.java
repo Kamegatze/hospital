@@ -8,6 +8,7 @@ import com.kamegatze.hospital.custom_exceptions.UserNotFoundException;
 import com.kamegatze.hospital.models.Doctor;
 import com.kamegatze.hospital.servisies.DoctorService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 
+@Validated
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/doctors")
@@ -34,7 +36,9 @@ public class DoctorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DoctorDTOList> getDoctor(@PathVariable Integer id) throws UserNotFoundException {
+    public ResponseEntity<DoctorDTOList> getDoctor(
+            @Min(value = 1, message = "id must be more 0") @PathVariable Integer id)
+            throws UserNotFoundException {
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(doctorService.getDoctor(id));
@@ -78,7 +82,9 @@ public class DoctorController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Response> deleteDoctor(@PathVariable Integer id) throws UserNotFoundException {
+    public ResponseEntity<Response> deleteDoctor(
+            @Min(value = 1, message = "id must be more 0") @PathVariable Integer id)
+            throws UserNotFoundException {
         this.doctorService.deleteDoctor(id);
 
         Response response = Response.builder()
