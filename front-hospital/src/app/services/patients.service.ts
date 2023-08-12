@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {delay, Observable} from "rxjs";
+import {delay, Observable, tap} from "rxjs";
 import {Patient} from "../models/patient";
 import {PatientTransfer} from "../models/patient-transfer";
 import {FormGroup} from "@angular/forms";
@@ -24,7 +24,18 @@ export class PatientsService {
   public patientById(id:number) : Observable<Patient> {
     return this.http.get<Patient>(`http://localhost:8080/patients/${id}`)
       .pipe(
-        delay(500)
+        delay(500),
+        tap(patient => {
+          patient.doctorDTOS.map(doctor => {
+            const [jobTimeBeginOne, jobTimeBeginTwo] = doctor.jobTimeBegin.split(":");
+            const [jobTimeEndOne, jobTimeEndTwo] = doctor.jobTimeEnd.split(":");
+              
+            doctor.jobTimeBegin = `${jobTimeBeginOne}:${jobTimeBeginTwo}`;
+            doctor.jobTimeEnd = `${jobTimeEndOne}:${jobTimeEndTwo}`;
+            
+            return doctor;
+          })
+        })
       );
   }
 
@@ -44,12 +55,12 @@ export class PatientsService {
   }
 
   public additionReception(doctorId:number, patientId:number) {
-    this.http.get(`http://localhost:8080/patients/addition-reception?doctorId=${doctorId}&patientId=${patientId}`)
+    this.http.get(`http://localhost:8080/reception/addition-reception?doctorId=${doctorId}&patientId=${patientId}`)
       .subscribe();
   }
 
   cancellationOfReception(doctorId: number, patientId: number) {
-    this.http.get(`http://localhost:8080/patients/cancel-of-reception?doctorId=${doctorId}&patientId=${patientId}`)
+    this.http.get(`http://localhost:8080/reception/cancel-of-reception?doctorId=${doctorId}&patientId=${patientId}`)
       .subscribe();
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {delay, Observable} from "rxjs";
+import {delay, map, Observable, tap} from "rxjs";
 import {Doctor} from "../models/doctor";
 
 @Injectable({
@@ -14,7 +14,22 @@ export class DoctorsService {
 
   public getAll(): Observable<Doctor[]> {
     return this.http.get<Doctor[]>("http://localhost:8080/doctors/")
-      .pipe(delay(500));
+      .pipe(
+        delay(500),
+        tap(
+          doctors => doctors
+            .map(doctor => {
+              
+              const [jobTimeBeginOne, jobTimeBeginTwo] = doctor.jobTimeBegin.split(":");
+              const [jobTimeEndOne, jobTimeEndTwo] = doctor.jobTimeEnd.split(":");
+              
+              doctor.jobTimeBegin = `${jobTimeBeginOne}:${jobTimeBeginTwo}`;
+              doctor.jobTimeEnd = `${jobTimeEndOne}:${jobTimeEndTwo}`;
+
+              return doctor;
+            })
+          )
+        );
   }
 
   public removeById(id:number) {
@@ -30,7 +45,7 @@ export class DoctorsService {
   public doctorById(id:number) : Observable<Doctor> {
     return this.http.get<Doctor>(`http://localhost:8080/doctors/${id}`)
       .pipe(
-        delay(500)
+        delay(500),
       );
   }
 

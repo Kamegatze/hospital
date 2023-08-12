@@ -97,8 +97,8 @@ export class AdditionDataComponent implements OnInit{
       lastName,
       patronymic,
       post,
-      jobTimeBegin: `${jobTimeBeginHour}:${jobTimeBeginMinute}:00`,
-      jobTimeEnd: `${jobTimeEndHour}:${jobTimeEndMinute}:00`,
+      jobTimeBegin:`${jobTimeBeginHour}:${jobTimeBeginMinute}`,
+      jobTimeEnd: `${jobTimeEndHour}:${jobTimeEndMinute}`,
       patientDTOS: []
     };
 
