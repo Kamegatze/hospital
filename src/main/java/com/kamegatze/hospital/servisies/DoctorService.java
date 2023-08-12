@@ -2,65 +2,65 @@ package com.kamegatze.hospital.servisies;
 
 import com.kamegatze.hospital.DTO.DoctorDTO;
 import com.kamegatze.hospital.DTO.DoctorDTOList;
+import com.kamegatze.hospital.custom_exceptions.UserNotFoundException;
 import com.kamegatze.hospital.repositories.DoctorRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.kamegatze.hospital.models.Doctor;
+
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class DoctorService {
+
     private final DoctorRepository doctorRepository;
 
-    @Autowired
-    public DoctorService(DoctorRepository doctorRepository) {
-        this.doctorRepository = doctorRepository;
-    }
 
     public List<DoctorDTOList> getAll() {
         DoctorDTOList doctorDTOList = new DoctorDTOList();
         return doctorDTOList.getDoctorDTOList(doctorRepository.findAll());
     }
 
-    public DoctorDTOList getDoctor(int id) {
-        Doctor doctor = this.doctorRepository.getReferenceById(id);
-        //форматирование данных под нужный формат
-        DoctorDTOList doctorDTOList = new DoctorDTOList();
-        doctorDTOList = doctorDTOList.getDoctorDTOList(List.of(doctor)).get(0);
+    private Doctor doctorById(Integer id) throws UserNotFoundException {
+        return this.doctorRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("Doctor not found on id: " + id));
+    }
+
+    public DoctorDTOList getDoctor(Integer id) throws UserNotFoundException {
+        Doctor doctor = doctorById(id);
+
+        DoctorDTOList doctorDTOList = DoctorDTOList.builder()
+                .id(doctor.getId())
+                .firstName(doctor.getFirstName())
+                .lastName(doctor.getLastName())
+                .patronymic(doctor.getPatronymic())
+                .post(doctor.getPost())
+                .jobTimeBegin(doctor.getJobTimeBegin())
+                .jobTimeEnd(doctor.getJobTimeEnd())
+                .build();
+
         doctorDTOList.setPatientsDTOS(doctor.getPatients());
 
         return doctorDTOList;
     }
 
-    public DoctorDTOList lastDoctor () {
-        Doctor doctor = this.doctorRepository.findLastRecord();
-
-        DoctorDTOList doctorDTOList = new DoctorDTOList();
-
-        doctorDTOList.setId(doctor.getId());
-        doctorDTOList.setLastName(doctor.getLastName());
-        doctorDTOList.setFirstName(doctor.getFirstName());
-        doctorDTOList.setPatronymic(doctor.getPatronymic());
-        doctorDTOList.setPost(doctor.getPost());
-        doctorDTOList.setJobTimeBegin(doctor.getJobTimeBegin());
-        doctorDTOList.setJobTimeEnd(doctor.getJobTimeEnd());
-        doctorDTOList.setPatientsDTOS(doctor.getPatients());
-
-        return doctorDTOList;
-    }
     @Transactional
     public void addAndUpdateDoctor(DoctorDTO doctorDTO) {
 
-        Doctor doctor = new Doctor();
+        Doctor doctor = Doctor.builder()
+                .firstName(doctorDTO.getFirstName())
+                .lastName(doctorDTO.getLastName())
+                .patronymic(doctorDTO.getPatronymic())
+                .post(doctorDTO.getPost())
+                .jobTimeBegin(doctorDTO.getJobTimeBegin())
+                .jobTimeEnd(doctorDTO.getJobTimeEnd())
+                .build();
+
         doctor.setId(doctorDTO.getId());
-        doctor.setFirstName(doctorDTO.getFirstName());
-        doctor.setLastName(doctorDTO.getLastName());
-        doctor.setPatronymic(doctorDTO.getPatronymic());
-        doctor.setPost(doctorDTO.getPost());
-        doctor.setJobTimeBegin(doctorDTO.getJobTimeBegin());
-        doctor.setJobTimeEnd(doctorDTO.getJobTimeEnd());
+
 
         this.doctorRepository.save(doctor);
     }
@@ -69,19 +69,4 @@ public class DoctorService {
         this.doctorRepository.deleteById(id);
     }
 
-    public DoctorDTOList findDoctorByPost(String post) throws Exception {
-        Doctor doctor = doctorRepository.findDoctorByPost(post).orElseThrow(() -> new Exception("These doctors does not exist"));
-
-        DoctorDTOList doctorDTOList = new DoctorDTOList();
-        doctorDTOList.setId(doctor.getId());
-        doctorDTOList.setFirstName(doctor.getFirstName());
-        doctorDTOList.setLastName(doctor.getLastName());
-        doctorDTOList.setPatronymic(doctor.getPatronymic());
-        doctorDTOList.setPost(doctor.getPost());
-        doctorDTOList.setJobTimeBegin(doctor.getJobTimeBegin());
-        doctorDTOList.setJobTimeEnd(doctor.getJobTimeEnd());
-        doctorDTOList.setPatientsDTOS(doctor.getPatients());
-
-        return doctorDTOList;
-    }
 }

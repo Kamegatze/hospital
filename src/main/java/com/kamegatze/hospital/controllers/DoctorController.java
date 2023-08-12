@@ -2,55 +2,78 @@ package com.kamegatze.hospital.controllers;
 
 import com.kamegatze.hospital.DTO.DoctorDTO;
 import com.kamegatze.hospital.DTO.DoctorDTOList;
+import com.kamegatze.hospital.DTO.EStatus;
+import com.kamegatze.hospital.DTO.Response;
+import com.kamegatze.hospital.custom_exceptions.UserNotFoundException;
 import com.kamegatze.hospital.servisies.DoctorService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.kamegatze.hospital.models.Doctor;
 import java.util.List;
 
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/doctors")
 public class DoctorController {
     private final DoctorService doctorService;
 
-    @Autowired
-    public DoctorController(DoctorService doctorService) {
-        this.doctorService = doctorService;
-    }
-
     @GetMapping("/")
-    public List<DoctorDTOList> getAll() {
-        return doctorService.getAll();
+    public ResponseEntity<List<DoctorDTOList>> getAll() {
+        return ResponseEntity.status(HttpStatus.OK)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(this.doctorService.getAll());
     }
 
     @GetMapping("/{id}")
-    public DoctorDTOList getDoctor(@PathVariable int id) {
-        return doctorService.getDoctor(id);
-    }
-
-    @GetMapping("/last")
-    public DoctorDTOList getLastDoctor() {
-        return this.doctorService.lastDoctor();
-    }
-
-    @GetMapping("/post")
-    public DoctorDTOList getDoctorByPost(@RequestParam String post) throws Exception {
-        return this.doctorService.findDoctorByPost(post);
+    public ResponseEntity<DoctorDTOList> getDoctor(@PathVariable Integer id) throws UserNotFoundException {
+        return ResponseEntity.status(HttpStatus.OK)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(doctorService.getDoctor(id));
     }
 
     @PostMapping("/")
-    public void addDoctor(@RequestBody DoctorDTO doctor) {
+    public ResponseEntity<Response> addDoctor(@RequestBody DoctorDTO doctor) {
         this.doctorService.addAndUpdateDoctor(doctor);
+
+        Response response = Response.builder()
+                .message("Doctor was created")
+                .status(EStatus.STATUS_CREATED)
+                .build();
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(response);
     }
 
     @PutMapping("/")
-    public void updateDoctor(@RequestBody DoctorDTO doctor) {
+    public ResponseEntity<Response> updateDoctor(@RequestBody DoctorDTO doctor) {
+
         this.doctorService.addAndUpdateDoctor(doctor);
+
+        Response response = Response.builder()
+                .message("Doctor was updated")
+                .status(EStatus.STATUS_UPDATED)
+                .build();
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(response);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteDoctor(@PathVariable Integer id) {
+    public ResponseEntity<Response> deleteDoctor(@PathVariable Integer id) {
         this.doctorService.deleteDoctor(id);
+
+        Response response = Response.builder()
+                .message("Doctor was deleted")
+                .status(EStatus.STATUS_DELETED)
+                .build();
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(response);
     }
 }
