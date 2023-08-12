@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -6,16 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  protected doctorActive:boolean = true;
-  protected patientActive:boolean = false;
 
-  protected changeDoctor() {
-    this.doctorActive = !this.doctorActive;
-    this.patientActive = !this.patientActive;
+  constructor(
+    private router:Router,
+  ) {}
+
+  protected isDoctors() {
+    return this.router.url.includes("/doctors");
   }
 
-  protected changePatient() {
-    this.patientActive = !this.patientActive;
-    this.doctorActive = !this.doctorActive;
+  protected isPatients() {
+    return this.router.url.includes("/patients");
   }
 }

@@ -6,13 +6,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a [ngClass]="{'nav-link':true,'active':doctorActive}"
+        <a [ngClass]="{'nav-link':true,'active':isDoctors()}"
            routerLink="/"
-           (click)="changeDoctor()"
             >Doctors</a>
-        <a [ngClass]="{'nav-link':true,'active':patientActive}"
+        <a [ngClass]="{'nav-link':true,'active':isPatients()}"
            routerLink="/patients"
-           (click)="changePatient()"
             >Patients</a>
       </div>
     </div>
