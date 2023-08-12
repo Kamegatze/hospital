@@ -47,7 +47,7 @@ public class DoctorController {
 
         Response response = Response.builder()
                 .message("Doctor was created")
-                .status(EStatus.STATUS_CREATED)
+                .status(EStatus.STATUS_CREATED.geStatus())
                 .build();
 
 
@@ -67,7 +67,7 @@ public class DoctorController {
 
         Response response = Response.builder()
                 .message("Doctor was updated")
-                .status(EStatus.STATUS_UPDATED)
+                .status(EStatus.STATUS_UPDATED.geStatus())
                 .build();
 
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -81,7 +81,7 @@ public class DoctorController {
 
         Response response = Response.builder()
                 .message("Doctor was deleted")
-                .status(EStatus.STATUS_DELETED)
+                .status(EStatus.STATUS_DELETED.geStatus())
                 .build();
 
         return ResponseEntity.status(HttpStatus.CREATED)

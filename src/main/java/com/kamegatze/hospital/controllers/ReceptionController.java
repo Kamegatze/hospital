@@ -30,7 +30,7 @@ public class ReceptionController {
 
         Response response = Response.builder()
                 .message("Patient writing on reception")
-                .status(EStatus.STATUS_RECEPTION_WRITING)
+                .status(EStatus.STATUS_RECEPTION_WRITING.geStatus())
                 .build();
 
         return ResponseEntity.status(HttpStatus.OK)
@@ -47,7 +47,7 @@ public class ReceptionController {
 
         Response response = Response.builder()
                 .message("Reception was canceled")
-                .status(EStatus.STATUS_RECEPTION_CANCELED)
+                .status(EStatus.STATUS_RECEPTION_CANCELED.geStatus())
                 .build();
 
         return ResponseEntity.status(HttpStatus.OK)

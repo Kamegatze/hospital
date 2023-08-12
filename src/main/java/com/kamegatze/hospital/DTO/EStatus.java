@@ -13,8 +13,13 @@ public enum EStatus {
 
     STATUS_RECEPTION_CANCELED(4);
 
+    private final Integer status;
 
+    EStatus(Integer status) {
+        this.status = status;
+    }
 
-    EStatus(int i) {
+    public Integer geStatus() {
+        return status;
     }
 }

@@ -52,7 +52,7 @@ public class PatientService {
     }
 
     @Transactional
-    public void addAndUpdatePatient(PatientDTO patientDTO) {
+    public Patient addAndUpdatePatient(PatientDTO patientDTO) {
         Patient patient = Patient.builder()
                 .firstName(patientDTO.getFirstName())
                 .lastName(patientDTO.getLastName())
@@ -63,11 +63,26 @@ public class PatientService {
 
         patient.setId(patientDTO.getId());
 
-        patientRepository.save(patient);
+        return patientRepository.save(patient);
     }
 
     @Transactional
-    public void removePatient(Integer id) {
+    public void removePatient(Integer id) throws UserNotFoundException {
+        Patient patient = getPatientById(id);
+
+        /*
+        * Remove relationship
+        * */
+        patient.getDoctors().forEach(doctor ->
+                        doctor.setPatients(
+                                doctor.getPatients().stream()
+                                        .filter(patientFilter -> !patientFilter.getId().equals(patient.getId()))
+                                        .toList()
+                        )
+        );
+
+        patientRepository.save(patient);
+
         patientRepository.deleteById(id);
     }
 }

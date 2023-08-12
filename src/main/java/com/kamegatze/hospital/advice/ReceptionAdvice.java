@@ -17,7 +17,7 @@ public class ReceptionAdvice {
     public ResponseEntity<Response> handlerExceptionOfUserNotFound(UserNotFoundException exception) {
         Response response = Response.builder()
                 .message(exception.getMessage())
-                .status(EStatus.STATUS_NOT_FOUND)
+                .status(EStatus.STATUS_NOT_FOUND.geStatus())
                 .build();
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND)

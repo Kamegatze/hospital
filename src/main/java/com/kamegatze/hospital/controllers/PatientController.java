@@ -5,14 +5,17 @@ import com.kamegatze.hospital.DTO.PatientDTOList;
 import com.kamegatze.hospital.DTO.Response;
 import com.kamegatze.hospital.DTO.EStatus;
 import com.kamegatze.hospital.custom_exceptions.UserNotFoundException;
+import com.kamegatze.hospital.models.Patient;
 import com.kamegatze.hospital.servisies.PatientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -37,15 +40,20 @@ public class PatientController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Response> addPatient(@RequestBody PatientDTO patient) {
-        patientService.addAndUpdatePatient(patient);
+    public ResponseEntity<Response> addPatient(
+            @RequestBody PatientDTO patient, UriComponentsBuilder uri) {
+
+        Patient patientSave = patientService.addAndUpdatePatient(patient);
 
         Response response = Response.builder()
                 .message("Patient was created")
-                .status(EStatus.STATUS_CREATED)
+                .status(EStatus.STATUS_CREATED.geStatus())
                 .build();
 
-        return ResponseEntity.status(HttpStatus.CREATED)
+        return ResponseEntity.created(
+                    uri.path("/patients/{id}")
+                            .build(Map.of("id", patientSave.getId()))
+                )
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(response);
     }
@@ -56,7 +64,7 @@ public class PatientController {
 
         Response response = Response.builder()
                 .message("Patient was updated")
-                .status(EStatus.STATUS_UPDATED)
+                .status(EStatus.STATUS_UPDATED.geStatus())
                 .build();
 
         return ResponseEntity.status(HttpStatus.OK)
@@ -65,12 +73,12 @@ public class PatientController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Response> removePatient(@PathVariable Integer id) {
+    public ResponseEntity<Response> removePatient(@PathVariable Integer id) throws UserNotFoundException {
         patientService.removePatient(id);
 
         Response response = Response.builder()
                 .message("Patient was deleted")
-                .status(EStatus.STATUS_DELETED)
+                .status(EStatus.STATUS_DELETED.geStatus())
                 .build();
 
         return ResponseEntity.status(HttpStatus.OK)

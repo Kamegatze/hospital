@@ -13,6 +13,6 @@ public class Response {
 
     private String message;
 
-    private EStatus status;
+    private Integer status;
 
 }
