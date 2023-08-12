@@ -4,6 +4,7 @@ import com.kamegatze.hospital.models.Patient;
 import lombok.*;
 
 import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import com.kamegatze.hospital.models.Doctor;
@@ -24,9 +25,9 @@ public class DoctorDTOList {
     
     private String post;
     
-    private Time jobTimeBegin;
+    private LocalTime jobTimeBegin;
     
-    private Time jobTimeEnd;
+    private LocalTime jobTimeEnd;
 
     private List<PatientDTOList> patientDTOS;
     public List<DoctorDTOList> getDoctorDTOList(List<Doctor> doctors) {

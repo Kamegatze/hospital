@@ -5,6 +5,7 @@ import com.kamegatze.hospital.DTO.PatientDTO;
 import com.kamegatze.hospital.DTO.PatientDTOList;
 import com.kamegatze.hospital.custom_exceptions.UserNotFoundException;
 import com.kamegatze.hospital.models.Patient;
+import com.kamegatze.hospital.repositories.DoctorPatientRepository;
 import com.kamegatze.hospital.repositories.DoctorRepository;
 import com.kamegatze.hospital.repositories.PatientRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ public class PatientService {
 
     private final PatientRepository patientRepository;
 
-    private final DoctorRepository doctorRepository;
+    private final DoctorPatientRepository doctorPatientRepository;
 
 
     public List<PatientDTOList> getAll() {
@@ -71,17 +72,9 @@ public class PatientService {
         Patient patient = getPatientById(id);
 
         /*
-        * Remove relationship
+        * Remove relationships
         * */
-        patient.getDoctors().forEach(doctor ->
-                        doctor.setPatients(
-                                doctor.getPatients().stream()
-                                        .filter(patientFilter -> !patientFilter.getId().equals(patient.getId()))
-                                        .toList()
-                        )
-        );
-
-        patientRepository.save(patient);
+        doctorPatientRepository.deleteByPatientId(patient.getId());
 
         patientRepository.deleteById(id);
     }

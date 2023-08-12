@@ -4,7 +4,7 @@ package com.kamegatze.hospital.models;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,10 +32,10 @@ public class Doctor extends Essence{
     private String post;
 
     @Column(name = "job_time_begin")
-    private Time jobTimeBegin;
+    private LocalTime jobTimeBegin;
 
     @Column(name = "job_time_end")
-    private Time jobTimeEnd;
+    private LocalTime jobTimeEnd;
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "doctor_patient",

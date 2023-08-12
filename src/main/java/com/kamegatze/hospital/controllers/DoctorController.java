@@ -7,10 +7,12 @@ import com.kamegatze.hospital.DTO.Response;
 import com.kamegatze.hospital.custom_exceptions.UserNotFoundException;
 import com.kamegatze.hospital.models.Doctor;
 import com.kamegatze.hospital.servisies.DoctorService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -40,7 +42,7 @@ public class DoctorController {
 
     @PostMapping("/")
     public ResponseEntity<Response> addDoctor(
-            @RequestBody DoctorDTO doctor, UriComponentsBuilder uri) {
+            @RequestBody @Valid DoctorDTO doctor, UriComponentsBuilder uri) {
 
 
         Doctor doctorSave = this.doctorService.addAndUpdateDoctor(doctor);
@@ -61,7 +63,7 @@ public class DoctorController {
     }
 
     @PutMapping("/")
-    public ResponseEntity<Response> updateDoctor(@RequestBody DoctorDTO doctor) {
+    public ResponseEntity<Response> updateDoctor(@RequestBody @Valid DoctorDTO doctor) {
 
         this.doctorService.addAndUpdateDoctor(doctor);
 
@@ -70,13 +72,13 @@ public class DoctorController {
                 .status(EStatus.STATUS_UPDATED.geStatus())
                 .build();
 
-        return ResponseEntity.status(HttpStatus.CREATED)
+        return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(response);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Response> deleteDoctor(@PathVariable Integer id) {
+    public ResponseEntity<Response> deleteDoctor(@PathVariable Integer id) throws UserNotFoundException {
         this.doctorService.deleteDoctor(id);
 
         Response response = Response.builder()
@@ -84,7 +86,7 @@ public class DoctorController {
                 .status(EStatus.STATUS_DELETED.geStatus())
                 .build();
 
-        return ResponseEntity.status(HttpStatus.CREATED)
+        return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(response);
     }

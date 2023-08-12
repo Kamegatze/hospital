@@ -11,7 +11,11 @@ public enum EStatus {
 
     STATUS_RECEPTION_WRITING(3),
 
-    STATUS_RECEPTION_CANCELED(4);
+    STATUS_RECEPTION_CANCELED(4),
+
+    STATUS_CANNOT_DESERIALIZE_TIME(5),
+
+    STATUS_FAILED_VALIDATION(6);
 
     private final Integer status;
 

@@ -3,6 +3,7 @@ package com.kamegatze.hospital.servisies;
 import com.kamegatze.hospital.DTO.DoctorDTO;
 import com.kamegatze.hospital.DTO.DoctorDTOList;
 import com.kamegatze.hospital.custom_exceptions.UserNotFoundException;
+import com.kamegatze.hospital.repositories.DoctorPatientRepository;
 import com.kamegatze.hospital.repositories.DoctorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ public class DoctorService {
 
     private final DoctorRepository doctorRepository;
 
+    private final DoctorPatientRepository doctorPatientRepository;
 
     public List<DoctorDTOList> getAll() {
         DoctorDTOList doctorDTOList = new DoctorDTOList();
@@ -65,7 +67,16 @@ public class DoctorService {
         return this.doctorRepository.save(doctor);
     }
     @Transactional
-    public void deleteDoctor(Integer id) {
+    public void deleteDoctor(Integer id) throws UserNotFoundException {
+
+        Doctor doctor = doctorById(id);
+
+        /*
+        * remove relationships
+        * */
+
+        doctorPatientRepository.deleteByDoctorId(doctor.getId());
+
         this.doctorRepository.deleteById(id);
     }
 
