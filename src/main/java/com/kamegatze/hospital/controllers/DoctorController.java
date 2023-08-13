@@ -19,6 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 
 @Validated
@@ -26,6 +27,9 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RequestMapping("/doctors")
 public class DoctorController {
+
+    private static Logger log = Logger.getLogger(DoctorController.class.getName());
+
     private final DoctorService doctorService;
 
     @GetMapping("/")
@@ -48,8 +52,11 @@ public class DoctorController {
     public ResponseEntity<Response> addDoctor(
             @RequestBody @Valid DoctorDTO doctor, UriComponentsBuilder uri) {
 
+        log.warning("begin addition doctor");
 
         Doctor doctorSave = this.doctorService.addAndUpdateDoctor(doctor);
+
+        log.info("end addition doctor");
 
         Response response = Response.builder()
                 .message("Doctor was created")
@@ -69,7 +76,11 @@ public class DoctorController {
     @PutMapping("/")
     public ResponseEntity<Response> updateDoctor(@RequestBody @Valid DoctorDTO doctor) {
 
+        log.warning("begin update doctor");
+
         this.doctorService.addAndUpdateDoctor(doctor);
+
+        log.info("end update doctor");
 
         Response response = Response.builder()
                 .message("Doctor was updated")
@@ -85,7 +96,12 @@ public class DoctorController {
     public ResponseEntity<Response> deleteDoctor(
             @Min(value = 1, message = "id must be more 0") @PathVariable Integer id)
             throws UserNotFoundException {
+
+        log.warning("begin delete doctor with relationship");
+
         this.doctorService.deleteDoctor(id);
+
+        log.info("end delete doctor with relationship");
 
         Response response = Response.builder()
                 .message("Doctor was deleted")

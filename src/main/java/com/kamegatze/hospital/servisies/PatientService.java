@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 @Transactional(readOnly = true)
@@ -23,6 +24,8 @@ public class PatientService {
     private final PatientRepository patientRepository;
 
     private final DoctorPatientRepository doctorPatientRepository;
+
+    private static Logger log = Logger.getLogger(PatientService.class.getName());
 
 
     public List<PatientDTOList> getAll() {
@@ -74,7 +77,11 @@ public class PatientService {
         /*
         * Remove relationships
         * */
+        log.warning("begin delete relationship");
+
         doctorPatientRepository.deleteByPatientId(patient.getId());
+
+        log.info("end delete relationship");
 
         patientRepository.deleteById(id);
     }

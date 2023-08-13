@@ -19,6 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 
 @Validated
@@ -26,6 +27,8 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RequestMapping("/patients")
 public class PatientController {
+
+    private static Logger log = Logger.getLogger(PatientController.class.getName());
 
     private final PatientService patientService;
 
@@ -48,7 +51,11 @@ public class PatientController {
     public ResponseEntity<Response> addPatient(
             @Valid @RequestBody PatientDTO patient, UriComponentsBuilder uri) {
 
+        log.warning("begin addition patient");
+
         Patient patientSave = patientService.addAndUpdatePatient(patient);
+
+        log.info("end addition patient");
 
         Response response = Response.builder()
                 .message("Patient was created")
@@ -65,7 +72,12 @@ public class PatientController {
 
     @PutMapping("/")
     public ResponseEntity<Response> updatePatient(@Valid @RequestBody PatientDTO patient) {
+
+        log.warning("begin update patient");
+
         patientService.addAndUpdatePatient(patient);
+
+        log.info("end update patient");
 
         Response response = Response.builder()
                 .message("Patient was updated")
@@ -82,7 +94,11 @@ public class PatientController {
             @Min(value = 1, message = "id must be more 0") @PathVariable Integer id)
             throws UserNotFoundException {
 
+        log.warning("begin delete patient");
+
         patientService.removePatient(id);
+
+        log.info("end delete patient");
 
         Response response = Response.builder()
                 .message("Patient was deleted")

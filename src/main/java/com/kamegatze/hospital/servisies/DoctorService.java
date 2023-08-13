@@ -11,18 +11,23 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kamegatze.hospital.models.Doctor;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class DoctorService {
 
+    private static Logger log = Logger.getLogger(DoctorService.class.getName());
+
     private final DoctorRepository doctorRepository;
 
     private final DoctorPatientRepository doctorPatientRepository;
 
     public List<DoctorDTOList> getAll() {
+
         DoctorDTOList doctorDTOList = new DoctorDTOList();
+
         return doctorDTOList.getDoctorDTOList(doctorRepository.findAll());
     }
 
@@ -32,6 +37,7 @@ public class DoctorService {
     }
 
     public DoctorDTOList getDoctor(Integer id) throws UserNotFoundException {
+
         Doctor doctor = doctorById(id);
 
         DoctorDTOList doctorDTOList = DoctorDTOList.builder()
@@ -75,7 +81,11 @@ public class DoctorService {
         * remove relationships
         * */
 
+        log.warning("begin delete relationship");
+
         doctorPatientRepository.deleteByDoctorId(doctor.getId());
+
+        log.info("end delete relationship");
 
         this.doctorRepository.deleteById(id);
     }

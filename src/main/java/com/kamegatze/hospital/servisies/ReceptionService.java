@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.List;
 
@@ -21,6 +22,8 @@ public class ReceptionService {
     private final DoctorRepository doctorRepository;
 
     private final PatientRepository patientRepository;
+
+    private static Logger log = Logger.getLogger(PatientService.class.getName());
 
     private List<Essence> getDoctorAndPatient(Integer doctorId, Integer patientId) throws UserNotFoundException {
         Doctor doctor = doctorRepository.findById(doctorId)
@@ -40,12 +43,20 @@ public class ReceptionService {
 
         Patient patient = (Patient) entities.get(1);
 
+        log.info("begin add relationship");
+
         doctor.getPatients().add(patient);
 
         patient.getDoctors().add(doctor);
 
+        log.info("end add relationship");
+
+        log.warning("begin save doctor and patient");
+
         doctorRepository.save(doctor);
         patientRepository.save(patient);
+
+        log.info("begin save doctor and patient");
     }
 
     @Transactional
@@ -56,13 +67,21 @@ public class ReceptionService {
 
         Patient patient = (Patient) entities.get(1);
 
+        log.info("begin delete relationship");
+
         doctor.setPatients(doctor.getPatients().stream().filter((item) -> !item.getId().equals(patientId))
                 .collect(Collectors.toList()));
 
         patient.setDoctors(patient.getDoctors().stream().filter((item) -> !item.getId().equals(doctorId))
                 .collect(Collectors.toList()));
 
+        log.info("end delete relationship");
+
+        log.warning("begin save doctor and patient");
+
         doctorRepository.save(doctor);
         patientRepository.save(patient);
+
+        log.info("end save doctor and patient");
     }
 }

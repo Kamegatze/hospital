@@ -13,11 +13,19 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 @ControllerAdvice(assignableTypes = DoctorController.class)
 public class DoctorAdvice {
 
+    private static Logger log = Logger.getLogger(DoctorController.class.getName());
+
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<Response> handlerExceptionOfUserNotFound(UserNotFoundException exception) {
+
+        log.log(Level.SEVERE, "Exception: ", exception);
+
         Response response = Response.builder()
                 .message(exception.getMessage())
                 .status(EStatus.STATUS_NOT_FOUND.geStatus())
@@ -30,6 +38,9 @@ public class DoctorAdvice {
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<Response> handleTimeNotDeserialize(HttpMessageNotReadableException exception) {
+
+        log.log(Level.SEVERE, "Exception: ", exception);
+
         Response response = Response.builder()
                 .message(exception.getMessage())
                 .status(EStatus.STATUS_CANNOT_DESERIALIZE_TIME.geStatus())
@@ -43,6 +54,8 @@ public class DoctorAdvice {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Response> handleValidException(MethodArgumentNotValidException exception) {
 
+        log.log(Level.SEVERE, "Exception: ", exception);
+
         Response response = Response.builder()
                 .message(exception.getFieldError().getDefaultMessage())
                 .status(EStatus.STATUS_FAILED_VALIDATION.geStatus())
@@ -55,6 +68,8 @@ public class DoctorAdvice {
 
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<Response> handleValidException(ConstraintViolationException exception) {
+
+        log.log(Level.SEVERE, "Exception: ", exception);
 
         Response response = Response.builder()
                 .message(exception.getMessage())

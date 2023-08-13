@@ -1,0 +1,106 @@
+Aug 13, 2023 1:38:39 PM org.apache.catalina.core.ApplicationContext log
+INFO: Initializing Spring DispatcherServlet 'dispatcherServlet'
+Aug 13, 2023 1:38:42 PM com.kamegatze.hospital.controllers.ReceptionController handleAdditionReception
+WARNING: begin addition relationship between doctor and patient
+Aug 13, 2023 1:38:42 PM com.kamegatze.hospital.servisies.ReceptionService handleAdditionReception
+INFO: begin add relationship
+Aug 13, 2023 1:38:42 PM com.kamegatze.hospital.servisies.ReceptionService handleAdditionReception
+INFO: end add relationship
+Aug 13, 2023 1:38:42 PM com.kamegatze.hospital.servisies.ReceptionService handleAdditionReception
+WARNING: begin save doctor and patient
+Aug 13, 2023 1:38:42 PM com.kamegatze.hospital.servisies.ReceptionService handleAdditionReception
+INFO: begin save doctor and patient
+Aug 13, 2023 1:38:42 PM com.kamegatze.hospital.controllers.ReceptionController handleAdditionReception
+INFO: end addition relationship between doctor and patient
+Aug 13, 2023 1:38:50 PM com.kamegatze.hospital.controllers.ReceptionController handleCancellationOfReception
+WARNING: begin delete relationship between doctor and patient
+Aug 13, 2023 1:38:50 PM com.kamegatze.hospital.servisies.ReceptionService handleCancellationOfReception
+INFO: begin delete relationship
+Aug 13, 2023 1:38:50 PM com.kamegatze.hospital.servisies.ReceptionService handleCancellationOfReception
+INFO: end delete relationship
+Aug 13, 2023 1:38:50 PM com.kamegatze.hospital.servisies.ReceptionService handleCancellationOfReception
+WARNING: begin save doctor and patient
+Aug 13, 2023 1:38:50 PM com.kamegatze.hospital.servisies.ReceptionService handleCancellationOfReception
+INFO: end save doctor and patient
+Aug 13, 2023 1:38:50 PM com.kamegatze.hospital.controllers.ReceptionController handleCancellationOfReception
+WARNING: end delete relationship between doctor and patient
+Aug 13, 2023 1:38:55 PM com.kamegatze.hospital.controllers.ReceptionController handleAdditionReception
+WARNING: begin addition relationship between doctor and patient
+Aug 13, 2023 1:38:55 PM com.kamegatze.hospital.servisies.ReceptionService handleAdditionReception
+INFO: begin add relationship
+Aug 13, 2023 1:38:55 PM com.kamegatze.hospital.servisies.ReceptionService handleAdditionReception
+INFO: end add relationship
+Aug 13, 2023 1:38:55 PM com.kamegatze.hospital.servisies.ReceptionService handleAdditionReception
+WARNING: begin save doctor and patient
+Aug 13, 2023 1:38:55 PM com.kamegatze.hospital.servisies.ReceptionService handleAdditionReception
+INFO: begin save doctor and patient
+Aug 13, 2023 1:38:55 PM com.kamegatze.hospital.controllers.ReceptionController handleAdditionReception
+INFO: end addition relationship between doctor and patient
+Aug 13, 2023 1:38:58 PM com.kamegatze.hospital.controllers.ReceptionController handleAdditionReception
+WARNING: begin addition relationship between doctor and patient
+Aug 13, 2023 1:38:58 PM com.kamegatze.hospital.servisies.ReceptionService handleAdditionReception
+INFO: begin add relationship
+Aug 13, 2023 1:38:58 PM com.kamegatze.hospital.servisies.ReceptionService handleAdditionReception
+INFO: end add relationship
+Aug 13, 2023 1:38:58 PM com.kamegatze.hospital.servisies.ReceptionService handleAdditionReception
+WARNING: begin save doctor and patient
+Aug 13, 2023 1:38:58 PM com.kamegatze.hospital.servisies.ReceptionService handleAdditionReception
+INFO: begin save doctor and patient
+Aug 13, 2023 1:38:58 PM com.kamegatze.hospital.controllers.ReceptionController handleAdditionReception
+INFO: end addition relationship between doctor and patient
+Aug 13, 2023 1:39:07 PM com.kamegatze.hospital.controllers.ReceptionController handleCancellationOfReception
+WARNING: begin delete relationship between doctor and patient
+Aug 13, 2023 1:39:07 PM com.kamegatze.hospital.servisies.ReceptionService handleCancellationOfReception
+INFO: begin delete relationship
+Aug 13, 2023 1:39:07 PM com.kamegatze.hospital.servisies.ReceptionService handleCancellationOfReception
+INFO: end delete relationship
+Aug 13, 2023 1:39:07 PM com.kamegatze.hospital.servisies.ReceptionService handleCancellationOfReception
+WARNING: begin save doctor and patient
+Aug 13, 2023 1:39:07 PM com.kamegatze.hospital.servisies.ReceptionService handleCancellationOfReception
+INFO: end save doctor and patient
+Aug 13, 2023 1:39:07 PM com.kamegatze.hospital.controllers.ReceptionController handleCancellationOfReception
+WARNING: end delete relationship between doctor and patient
+Aug 13, 2023 1:39:08 PM com.kamegatze.hospital.controllers.ReceptionController handleCancellationOfReception
+WARNING: begin delete relationship between doctor and patient
+Aug 13, 2023 1:39:08 PM com.kamegatze.hospital.servisies.ReceptionService handleCancellationOfReception
+INFO: begin delete relationship
+Aug 13, 2023 1:39:08 PM com.kamegatze.hospital.servisies.ReceptionService handleCancellationOfReception
+INFO: end delete relationship
+Aug 13, 2023 1:39:08 PM com.kamegatze.hospital.servisies.ReceptionService handleCancellationOfReception
+WARNING: begin save doctor and patient
+Aug 13, 2023 1:39:08 PM com.kamegatze.hospital.servisies.ReceptionService handleCancellationOfReception
+INFO: end save doctor and patient
+Aug 13, 2023 1:39:08 PM com.kamegatze.hospital.controllers.ReceptionController handleCancellationOfReception
+WARNING: end delete relationship between doctor and patient
+Aug 13, 2023 1:39:31 PM com.kamegatze.hospital.controllers.ReceptionController handleAdditionReception
+WARNING: begin addition relationship between doctor and patient
+Aug 13, 2023 1:39:31 PM com.kamegatze.hospital.servisies.ReceptionService handleAdditionReception
+INFO: begin add relationship
+Aug 13, 2023 1:39:31 PM com.kamegatze.hospital.servisies.ReceptionService handleAdditionReception
+INFO: end add relationship
+Aug 13, 2023 1:39:31 PM com.kamegatze.hospital.servisies.ReceptionService handleAdditionReception
+WARNING: begin save doctor and patient
+Aug 13, 2023 1:39:31 PM com.kamegatze.hospital.servisies.ReceptionService handleAdditionReception
+INFO: begin save doctor and patient
+Aug 13, 2023 1:39:31 PM com.kamegatze.hospital.controllers.ReceptionController handleAdditionReception
+INFO: end addition relationship between doctor and patient
+Aug 13, 2023 1:39:34 PM com.kamegatze.hospital.controllers.ReceptionController handleAdditionReception
+WARNING: begin addition relationship between doctor and patient
+Aug 13, 2023 1:39:34 PM com.kamegatze.hospital.servisies.ReceptionService handleAdditionReception
+INFO: begin add relationship
+Aug 13, 2023 1:39:34 PM com.kamegatze.hospital.servisies.ReceptionService handleAdditionReception
+INFO: end add relationship
+Aug 13, 2023 1:39:34 PM com.kamegatze.hospital.servisies.ReceptionService handleAdditionReception
+WARNING: begin save doctor and patient
+Aug 13, 2023 1:39:34 PM com.kamegatze.hospital.servisies.ReceptionService handleAdditionReception
+INFO: begin save doctor and patient
+Aug 13, 2023 1:39:34 PM com.kamegatze.hospital.controllers.ReceptionController handleAdditionReception
+INFO: end addition relationship between doctor and patient
+Aug 13, 2023 1:39:47 PM com.kamegatze.hospital.controllers.PatientController removePatient
+WARNING: begin delete patient
+Aug 13, 2023 1:39:47 PM com.kamegatze.hospital.servisies.PatientService removePatient
+WARNING: begin delete relationship
+Aug 13, 2023 1:39:47 PM com.kamegatze.hospital.servisies.PatientService removePatient
+INFO: end delete relationship
+Aug 13, 2023 1:39:47 PM com.kamegatze.hospital.controllers.PatientController removePatient
+INFO: end delete patient

@@ -15,11 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.logging.Logger;
+
 @Validated
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/reception")
 public class ReceptionController {
+
+    private static Logger log = Logger.getLogger(ReceptionController.class.getName());
 
     private final ReceptionService receptionService;
 
@@ -29,7 +33,11 @@ public class ReceptionController {
             @Min(value = 1, message = "id must be more 0") @RequestParam Integer patientId)
             throws UserNotFoundException {
 
+        log.warning("begin addition relationship between doctor and patient");
+
         this.receptionService.handleAdditionReception(doctorId, patientId);
+
+        log.info("end addition relationship between doctor and patient");
 
         Response response = Response.builder()
                 .message("Patient writing on reception")
@@ -47,7 +55,11 @@ public class ReceptionController {
             @Min(value = 1, message = "id must be more 0") @RequestParam Integer patientId)
             throws UserNotFoundException {
 
+        log.warning("begin delete relationship between doctor and patient");
+
         this.receptionService.handleCancellationOfReception(doctorId, patientId);
+
+        log.warning("end delete relationship between doctor and patient");
 
         Response response = Response.builder()
                 .message("Reception was canceled")
